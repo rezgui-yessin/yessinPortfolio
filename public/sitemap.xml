@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://yessinrezgui.dev/</loc></url>
-  <url><loc>https://yessinrezgui.dev/projects/shopsphere</loc></url>
-  <url><loc>https://yessinrezgui.dev/projects/security-study-tools</loc></url>
-  <url><loc>https://yessinrezgui.dev/projects/alpha-beta-visualizer</loc></url>
+  <url><loc>https://yessinrezgui.dev/projects/hotel-management-system</loc></url>
+  <url><loc>https://yessinrezgui.dev/projects/medical-appointment-scheduling</loc></url>
+  <url><loc>https://yessinrezgui.dev/projects/food-delivery-app</loc></url>
+  <url><loc>https://yessinrezgui.dev/projects/ecommerce-store</loc></url>
+  <url><loc>https://yessinrezgui.dev/projects/employee-management-system</loc></url>
+  <url><loc>https://yessinrezgui.dev/projects/elearning-platform</loc></url>
 </urlset>

@@ -3,6 +3,7 @@ export const en = {
     home: 'Home',
     about: 'About',
     skills: 'Stack',
+    certifications: 'Certifications',
     journey: 'Journey',
     projects: 'Projects',
     learning: 'Learning',
@@ -69,7 +70,12 @@ export const en = {
   journey: {
     eyebrow: 'Journey',
     title: 'Education and experience, in order',
-    subtitle: 'A straight line from a Tunisian classroom to enterprise-style Angular admin panels.',
+    subtitle: 'From core computer science in Tunis to enterprise-grade software and graduate studies in Italy.',
+    filters: {
+      all: 'All',
+      study: 'Study',
+      work: 'Work & Internship',
+    },
   },
   experience: {
     title: 'Experience',
@@ -81,12 +87,11 @@ export const en = {
     eyebrow: 'Projects',
     title: 'Things I have actually built',
     subtitle:
-      "One flagship project I'm actively building, plus academic and personal work that shows range. Nothing here is vaporware.",
+      'Full-stack applications built with Angular and Spring Boot, featuring modern architectures, secure authentication, and scalable REST APIs.',
     filters: {
       all: 'All',
-      flagship: 'Flagship',
-      academic: 'Academic',
-      personal: 'Personal',
+      technical: 'Technical Projects',
+      internship: 'Internship Experience',
     },
     viewDetails: 'View details',
     backToProjects: 'Back to projects',
@@ -97,6 +102,18 @@ export const en = {
     status: 'Status',
     links: 'Links',
     noRepo: 'Repository link coming soon',
+  },
+  certifications: {
+    eyebrow: 'Certifications',
+    title: 'Verified credentials & training',
+    subtitle:
+      'Formal certifications completed with comprehensive hands-on practice in Docker, Spring Boot, Angular, and Java.',
+    instructor: 'Instructor',
+    verified: 'Verified Completion',
+    viewPdf: 'View PDF',
+    verify: 'Verify',
+    preview: 'Preview',
+    close: 'Close',
   },
   learning: {
     eyebrow: 'Currently learning',
@@ -109,10 +126,14 @@ export const en = {
     title: "Let's talk about a junior role",
     subtitle:
       "I'm looking for Junior Full-Stack or Frontend Developer roles across Europe. If your team works in Angular, Spring Boot, or is open to someone who does, I'd like to hear from you.",
-    email: 'Email',
+    email: 'Personal Email',
+    academicEmail: 'Academic Email',
+    phone: 'Phone & WhatsApp',
     linkedin: 'LinkedIn',
     github: 'GitHub',
     location: 'Based in Pesaro, Italy — open to remote and relocation',
+    copy: 'Copy',
+    copied: 'Copied!',
   },
   footer: {
     tagline: 'Full-Stack Engineer — Angular · Spring Boot · Keycloak · Docker',
@@ -123,9 +144,8 @@ export const en = {
   common: {
     inProgress: 'In progress',
     complete: 'Complete',
-    academicProject: 'Academic project',
-    personalProject: 'Personal project',
-    flagshipProject: 'Flagship project',
+    technicalProject: 'Technical Project',
+    internshipProject: 'Internship Experience',
   },
 };
 

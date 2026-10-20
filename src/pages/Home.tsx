@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { Hero } from '../components/hero/Hero';
 import { About } from '../components/about/About';
 import { Skills } from '../components/skills/Skills';
+import { Certifications } from '../components/certifications/Certifications';
 import { Journey } from '../components/journey/Journey';
 import { Projects } from '../components/projects/Projects';
 import { Learning } from '../components/learning/Learning';
@@ -24,6 +25,7 @@ export function Home() {
       <Hero />
       <About />
       <Skills />
+      <Certifications />
       <Journey />
       <Projects />
       <Learning />

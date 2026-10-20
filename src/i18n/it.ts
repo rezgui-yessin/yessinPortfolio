@@ -5,6 +5,7 @@ export const it: Dictionary = {
     home: 'Home',
     about: 'Chi sono',
     skills: 'Competenze',
+    certifications: 'Certificazioni',
     journey: 'Percorso',
     projects: 'Progetti',
     learning: 'In apprendimento',
@@ -71,7 +72,12 @@ export const it: Dictionary = {
   journey: {
     eyebrow: 'Percorso',
     title: 'Formazione ed esperienza, in ordine',
-    subtitle: 'Una linea diretta da un\u2019aula in Tunisia a pannelli admin Angular in stile enterprise.',
+    subtitle: 'Dalle basi dell’informatica a Tunisi allo sviluppo software aziendale e agli studi magistrali in Italia.',
+    filters: {
+      all: 'Tutti',
+      study: 'Studio',
+      work: 'Lavoro & Stage',
+    },
   },
   experience: { title: 'Esperienza' },
   education: { title: 'Formazione' },
@@ -79,12 +85,11 @@ export const it: Dictionary = {
     eyebrow: 'Progetti',
     title: 'Cose che ho davvero costruito',
     subtitle:
-      'Un progetto principale a cui lavoro attivamente, più lavori accademici e personali che mostrano varietà. Niente qui è promessa vuota.',
+      'Applicazioni full-stack realizzate con Angular e Spring Boot, con architetture moderne, autenticazione sicura e API REST scalabili.',
     filters: {
       all: 'Tutti',
-      flagship: 'Principale',
-      academic: 'Accademico',
-      personal: 'Personale',
+      technical: 'Progetti Tecnici',
+      internship: 'Esperienze di Stage',
     },
     viewDetails: 'Vedi dettagli',
     backToProjects: 'Torna ai progetti',
@@ -95,6 +100,18 @@ export const it: Dictionary = {
     status: 'Stato',
     links: 'Link',
     noRepo: 'Link al repository in arrivo',
+  },
+  certifications: {
+    eyebrow: 'Certificazioni',
+    title: 'Certificati verificati e formazione',
+    subtitle:
+      'Corsi ufficiali completati con approfondita pratica su Docker, Spring Boot, Angular e Java.',
+    instructor: 'Docente',
+    verified: 'Completamento Verificato',
+    viewPdf: 'Vedi PDF',
+    verify: 'Verifica',
+    preview: 'Anteprima',
+    close: 'Chiudi',
   },
   learning: {
     eyebrow: 'Sto imparando',
@@ -107,10 +124,14 @@ export const it: Dictionary = {
     title: 'Parliamo di un ruolo junior',
     subtitle:
       'Sto cercando ruoli da Junior Full-Stack o Frontend Developer in Europa. Se il tuo team lavora con Angular, Spring Boot, o è aperto a qualcuno che le impara, scrivimi.',
-    email: 'Email',
+    email: 'Email Personale',
+    academicEmail: 'Email Accademica',
+    phone: 'Telefono & WhatsApp',
     linkedin: 'LinkedIn',
     github: 'GitHub',
     location: 'Con base a Pesaro, Italia — disponibile per remoto e trasferimento',
+    copy: 'Copia',
+    copied: 'Copiato!',
   },
   footer: {
     tagline: 'Full-Stack Engineer — Angular · Spring Boot · Keycloak · Docker',
@@ -121,8 +142,7 @@ export const it: Dictionary = {
   common: {
     inProgress: 'In corso',
     complete: 'Completato',
-    academicProject: 'Progetto accademico',
-    personalProject: 'Progetto personale',
-    flagshipProject: 'Progetto principale',
+    technicalProject: 'Progetto Tecnico',
+    internshipProject: 'Esperienza di Stage',
   },
 };

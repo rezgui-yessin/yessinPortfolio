@@ -21,8 +21,9 @@ import {
   SiPython,
   SiNginx,
   SiLinux,
+  SiMongodb,
 } from 'react-icons/si';
-import { TbCloud } from 'react-icons/tb';
+import { TbCloud, TbApi, TbMessages, TbAward, TbCertificate, TbUsersGroup, TbRefreshDot } from 'react-icons/tb';
 
 export const iconMap: Record<string, IconType> = {
   java: FaJava,
@@ -35,6 +36,7 @@ export const iconMap: Record<string, IconType> = {
   springsecurity: SiSpringsecurity,
   postgresql: SiPostgresql,
   mysql: SiMysql,
+  mongodb: SiMongodb,
   docker: SiDocker,
   githubactions: SiGithubactions,
   git: SiGit,
@@ -49,8 +51,40 @@ export const iconMap: Record<string, IconType> = {
   linux: SiLinux,
   aws: FaAws,
   cloud: TbCloud,
+  api: TbApi,
+  websocket: TbMessages,
+  scrum: TbRefreshDot,
+  agile: TbUsersGroup,
+  award: TbAward,
+  certificate: TbCertificate,
+};
+
+export const techIconKey: Record<string, string> = {
+  Angular: 'angular',
+  'Spring Boot': 'springboot',
+  'Spring Security': 'springsecurity',
+  'REST APIs': 'api',
+  PostgreSQL: 'postgresql',
+  MySQL: 'mysql',
+  MongoDB: 'mongodb',
+  Keycloak: 'keycloak',
+  Docker: 'docker',
+  'Docker Compose': 'docker',
+  'GitHub Actions': 'githubactions',
+  HTML: 'html5',
+  CSS: 'css3',
+  JavaScript: 'javascript',
+  'HTML5 Canvas': 'html5',
+  TypeScript: 'typescript',
+  Java: 'java',
+  JWT: 'jwt',
+  Python: 'python',
+  WebSocket: 'websocket',
+  Scrum: 'scrum',
+  Agile: 'agile',
 };
 
 export function getIcon(key: string): IconType {
   return iconMap[key] ?? TbCloud;
 }
+

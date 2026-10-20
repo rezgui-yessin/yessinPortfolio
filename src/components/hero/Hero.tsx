@@ -4,7 +4,7 @@ import { useI18n } from '../../i18n';
 import { SystemDiagram } from './SystemDiagram';
 
 export function Hero() {
-  const { t } = useI18n();
+  const { lang, t } = useI18n();
 
   const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
@@ -72,7 +72,10 @@ export function Hero() {
               {t.hero.cta2}
             </button>
             <a
-              href="/cv/yessin-rezgui-cv-en.pdf"
+              href={`/cv/yessin-rezgui-cv-${lang}.pdf`}
+              download={`yessin-rezgui-cv-${lang}.pdf`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-2 px-2 py-2.5 font-mono text-[12px] uppercase tracking-wide text-[color:var(--bp-ink-faint)] transition-colors hover:text-[color:var(--bp-ink)]"
             >
               <FiDownload size={13} />

@@ -9,6 +9,7 @@ import type { Lang } from '../../types';
 const sections: { key: keyof ReturnType<typeof useI18n>['t']['nav']; id: string }[] = [
   { key: 'about', id: 'about' },
   { key: 'skills', id: 'skills' },
+  { key: 'certifications', id: 'certifications' },
   { key: 'journey', id: 'journey' },
   { key: 'projects', id: 'projects' },
   { key: 'learning', id: 'learning' },
@@ -117,7 +118,10 @@ export function Navbar() {
             {theme === 'dark' ? <FiSun size={14} /> : <FiMoon size={14} />}
           </button>
           <a
-            href="/cv/yessin-rezgui-cv-en.pdf"
+            href={`/cv/yessin-rezgui-cv-${lang}.pdf`}
+            download={`yessin-rezgui-cv-${lang}.pdf`}
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center gap-1.5 rounded border border-[color:var(--bp-line-strong)] px-3 py-1.5 font-mono text-[11px] uppercase tracking-wide text-[color:var(--bp-ink)] transition-colors hover:border-[color:var(--bp-cyan)] hover:text-[color:var(--bp-cyan-bright)]"
           >
             <FiDownload size={12} />
@@ -152,6 +156,17 @@ export function Navbar() {
                   {t.nav[s.key]}
                 </button>
               ))}
+              <a
+                href={`/cv/yessin-rezgui-cv-${lang}.pdf`}
+                download={`yessin-rezgui-cv-${lang}.pdf`}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+                className="mt-2 flex items-center justify-center gap-2 rounded border border-[color:var(--bp-cyan)] py-2 font-mono text-xs uppercase tracking-wide text-[color:var(--bp-cyan-bright)]"
+              >
+                <FiDownload size={14} />
+                {t.nav.resume}
+              </a>
               <div className="mt-2 flex items-center justify-between border-t border-[color:var(--bp-line)] pt-3">
                 <div className="flex items-center rounded border border-[color:var(--bp-line)] font-mono text-[11px]">
                   {langs.map((l) => (

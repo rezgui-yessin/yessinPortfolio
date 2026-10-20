@@ -25,21 +25,24 @@ export type SkillCategory =
   | 'security'
   | 'tools';
 
+export type JourneyKind = 'study' | 'work';
+
 export interface JourneyEntry {
   id: string;
   year: string;
-  kind: 'education' | 'work' | 'milestone';
+  kind: JourneyKind;
   title: LocalizedText;
   org: string;
   detail: LocalizedText;
   tags: string[];
 }
 
-export type ProjectKind = 'flagship' | 'academic' | 'personal';
+export type ProjectKind = 'technical' | 'internship';
 
 export interface Project {
   id: string;
   kind: ProjectKind;
+  origins?: ('technical' | 'internship')[];
   title: string;
   tagline: LocalizedText;
   summary: LocalizedText;
@@ -51,6 +54,7 @@ export interface Project {
   github?: string;
   demo?: string;
   architecture?: string[];
+  company?: string;
 }
 
 export interface ExperienceEntry {
@@ -77,4 +81,18 @@ export interface LearningItem {
   name: string;
   icon: string;
   detail: LocalizedText;
+}
+
+export interface CertificationItem {
+  id: string;
+  title: string;
+  issuer: string;
+  instructor?: string;
+  date: string;
+  detail: LocalizedText;
+  skills: string[];
+  icon: string;
+  image?: string;
+  pdfUrl?: string;
+  credentialUrl?: string;
 }

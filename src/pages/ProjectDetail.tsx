@@ -4,13 +4,11 @@ import { motion } from 'framer-motion';
 import { FiArrowLeft, FiGithub, FiExternalLink } from 'react-icons/fi';
 import { useI18n } from '../i18n';
 import { projects } from '../data/projects';
-import { getIcon } from '../data/iconMap';
-import { techIconKey } from '../components/projects/ProjectCard';
+import { getIcon, techIconKey } from '../data/iconMap';
 
 const kindLabelKey = {
-  flagship: 'flagshipProject',
-  academic: 'academicProject',
-  personal: 'personalProject',
+  technical: 'technicalProject',
+  internship: 'internshipProject',
 } as const;
 
 export function ProjectDetail() {
@@ -37,7 +35,7 @@ export function ProjectDetail() {
 
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
           <span className="rounded-full border border-[color:var(--bp-cyan)] px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wide text-[color:var(--bp-cyan-bright)]">
-            {t.common[kindLabelKey[project.kind]]}
+            {project.company ? `${project.company} · ${t.common[kindLabelKey[project.kind]]}` : t.common[kindLabelKey[project.kind]]}
           </span>
 
           <h1 className="mt-4 font-display text-3xl font-semibold tracking-tight text-[color:var(--bp-ink)] md:text-4xl">
@@ -137,6 +135,8 @@ export function ProjectDetail() {
               {project.github ? (
                 <a
                   href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center gap-2 rounded border border-[color:var(--bp-line-strong)] px-3.5 py-2 font-mono text-[12px] uppercase tracking-wide text-[color:var(--bp-ink)] transition-colors hover:border-[color:var(--bp-cyan)] hover:text-[color:var(--bp-cyan-bright)]"
                 >
                   <FiGithub size={13} />
@@ -151,6 +151,8 @@ export function ProjectDetail() {
               {project.demo && (
                 <a
                   href={project.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center gap-2 rounded border border-[color:var(--bp-line-strong)] px-3.5 py-2 font-mono text-[12px] uppercase tracking-wide text-[color:var(--bp-ink)] transition-colors hover:border-[color:var(--bp-cyan)] hover:text-[color:var(--bp-cyan-bright)]"
                 >
                   <FiExternalLink size={13} />

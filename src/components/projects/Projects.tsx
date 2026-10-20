@@ -6,21 +6,24 @@ import { SectionEyebrow } from '../about/About';
 import { ProjectCard } from './ProjectCard';
 import type { Project } from '../../types';
 
-const kinds: Project['kind'][] = ['flagship', 'academic', 'personal'];
+const kinds: Project['kind'][] = ['technical', 'internship'];
 
 export function Projects() {
   const { t } = useI18n();
   const [filter, setFilter] = useState<'all' | Project['kind']>('all');
 
   const filtered = useMemo(
-    () => (filter === 'all' ? projects : projects.filter((p) => p.kind === filter)),
+    () =>
+      filter === 'all'
+        ? projects
+        : projects.filter((p) => p.kind === filter || p.origins?.includes(filter)),
     [filter]
   );
 
   return (
     <section id="projects" className="border-b border-[color:var(--bp-line)] px-5 py-20 md:py-28">
       <div className="mx-auto max-w-6xl">
-        <SectionEyebrow n="04" label={t.projects.eyebrow} />
+        <SectionEyebrow n="05" label={t.projects.eyebrow} />
         <h2 className="mt-4 font-display text-2xl font-semibold tracking-tight text-[color:var(--bp-ink)] md:text-3xl">
           {t.projects.title}
         </h2>

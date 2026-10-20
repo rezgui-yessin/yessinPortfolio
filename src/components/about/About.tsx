@@ -2,10 +2,10 @@ import { motion } from 'framer-motion';
 import { useI18n } from '../../i18n';
 
 const langBadges = [
-  { code: 'AR', label: 'Arabic' },
-  { code: 'IT', label: 'Italiano' },
-  { code: 'FR', label: 'Français' },
-  { code: 'EN', label: 'English' },
+  { code: 'AR', label: 'Arabic', level: 'Native' },
+  { code: 'FR', label: 'Français', level: 'Intermediate' },
+  { code: 'EN', label: 'English', level: 'Intermediate' },
+  { code: 'IT', label: 'Italiano', level: 'Basic' },
 ];
 
 export function About() {
@@ -27,11 +27,14 @@ export function About() {
               {langBadges.map((l) => (
                 <span
                   key={l.code}
-                  className="flex items-center gap-1.5 rounded border border-[color:var(--bp-line)] px-2.5 py-1 font-mono text-[11px] text-[color:var(--bp-ink-dim)]"
-                  title={l.label}
+                  className="flex items-center gap-2 rounded border border-[color:var(--bp-line)] bg-[color:var(--bp-bg-card)] px-3 py-1.5 font-mono text-[11px] text-[color:var(--bp-ink-dim)]"
+                  title={`${l.label} (${l.level})`}
                 >
-                  <span className="text-[color:var(--bp-cyan)]">{l.code}</span>
-                  {l.label}
+                  <span className="font-semibold text-[color:var(--bp-cyan)]">{l.code}</span>
+                  <span className="text-[color:var(--bp-ink)]">{l.label}</span>
+                  <span className="rounded bg-[color:var(--bp-line)]/60 px-1.5 py-0.5 text-[9px] uppercase tracking-wider text-[color:var(--bp-ink-faint)]">
+                    {l.level}
+                  </span>
                 </span>
               ))}
             </div>

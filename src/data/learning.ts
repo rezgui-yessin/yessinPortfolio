@@ -23,9 +23,9 @@ export const learningItems: LearningItem[] = [
     name: 'Microservices at scale',
     icon: 'java',
     detail: {
-      en: 'ShopSphere is a modular monolith today; studying how the same domains would split into services with an API gateway and messaging.',
-      it: 'ShopSphere oggi è un monolite modulare; sto studiando come suddividere gli stessi domini in servizi con un API gateway e messaggistica.',
-      fr: 'ShopSphere est aujourd\u2019hui un monolithe modulaire ; j\u2019étudie comment ces domaines se diviseraient en services avec une passerelle API et de la messagerie.',
+      en: 'My e-commerce store is a modular monolith today; studying how the same domains would split into services with an API gateway and messaging.',
+      it: 'Il mio e-commerce oggi è un monolite modulare; sto studiando come suddividere gli stessi domini in servizi con un API gateway e messaggistica.',
+      fr: 'Mon store e-commerce est aujourd’hui un monolithe modulaire ; j’étudie comment ces domaines se diviseraient en services avec une passerelle API et de la messagerie.',
     },
   },
 ];

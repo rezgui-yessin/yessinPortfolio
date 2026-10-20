@@ -3,26 +3,11 @@ import { Link } from 'react-router-dom';
 import { FiArrowUpRight } from 'react-icons/fi';
 import { useI18n } from '../../i18n';
 import type { Project } from '../../types';
-import { getIcon } from '../../data/iconMap';
+import { getIcon, techIconKey } from '../../data/iconMap';
 
-const kindStyle: Record<Project['kind'], { color: string; labelKey: 'flagshipProject' | 'academicProject' | 'personalProject' }> = {
-  flagship: { color: 'var(--bp-amber)', labelKey: 'flagshipProject' },
-  academic: { color: 'var(--bp-cyan)', labelKey: 'academicProject' },
-  personal: { color: 'var(--bp-good)', labelKey: 'personalProject' },
-};
-
-const techIconKey: Record<string, string> = {
-  Angular: 'angular',
-  'Spring Boot': 'springboot',
-  Keycloak: 'keycloak',
-  PostgreSQL: 'postgresql',
-  Docker: 'docker',
-  'GitHub Actions': 'githubactions',
-  HTML: 'html5',
-  CSS: 'css3',
-  JavaScript: 'javascript',
-  'HTML5 Canvas': 'html5',
-  Java: 'java',
+const kindStyle: Record<Project['kind'], { color: string; labelKey: 'technicalProject' | 'internshipProject' }> = {
+  technical: { color: 'var(--bp-cyan)', labelKey: 'technicalProject' },
+  internship: { color: 'var(--bp-amber)', labelKey: 'internshipProject' },
 };
 
 export function ProjectCard({ project, index }: { project: Project; index: number }) {
@@ -46,7 +31,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
             className="rounded-full border px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide"
             style={{ borderColor: style.color, color: style.color }}
           >
-            {t.common[style.labelKey]}
+            {project.company ? `${project.company} · ${t.common[style.labelKey]}` : t.common[style.labelKey]}
           </span>
           <FiArrowUpRight
             size={16}
@@ -81,5 +66,3 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
     </motion.div>
   );
 }
-
-export { techIconKey };

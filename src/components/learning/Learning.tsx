@@ -10,7 +10,7 @@ export function Learning() {
   return (
     <section id="learning" className="border-b border-[color:var(--bp-line)] px-5 py-20 md:py-28">
       <div className="mx-auto max-w-6xl">
-        <SectionEyebrow n="05" label={t.learning.eyebrow} />
+        <SectionEyebrow n="06" label={t.learning.eyebrow} />
         <h2 className="mt-4 font-display text-2xl font-semibold tracking-tight text-[color:var(--bp-ink)] md:text-3xl">
           {t.learning.title}
         </h2>
