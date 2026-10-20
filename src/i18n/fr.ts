@@ -1,0 +1,128 @@
+import type { Dictionary } from './en';
+
+export const fr: Dictionary = {
+  nav: {
+    home: 'Accueil',
+    about: '\u00c0 propos',
+    skills: 'Stack',
+    journey: 'Parcours',
+    projects: 'Projets',
+    learning: 'Apprentissage',
+    contact: 'Contact',
+    resume: 'CV',
+  },
+  hero: {
+    eyebrow: 'Ingénieur Full-Stack, Pesaro / Remote',
+    title1: 'Je construis les systèmes',
+    title2: 'derrière l\u2019interface.',
+    subtitle:
+      'Étudiant en dernière année de master, je construis des applications full-stack proches de la production — Angular en front, Spring Boot et Keycloak en dessous, le tout conteneurisé avec Docker et CI/CD.',
+    cta1: 'Voir les projets',
+    cta2: 'Me contacter',
+    cta3: 'Télécharger le CV',
+    diagramLabel: 'Le système que je construis vraiment',
+  },
+  about: {
+    eyebrow: '\u00c0 propos',
+    title: 'Du commerce à la salle des serveurs',
+    p1: 'Je suis Yessin — étudiant en dernière année de master en Informatique et Innovation Numérique à l\u2019Université d\u2019Urbino Carlo Bo, à Pesaro. Avant l\u2019informatique, j\u2019ai passé plusieurs années dans le commerce de détail et le service client en Tunisie, c\u2019est là que j\u2019ai vraiment appris où les systèmes se cassent : pas dans le code, mais dans les transmissions entre les personnes.',
+    p2: 'Cet instinct se retrouve dans ma façon de développer aujourd\u2019hui — je me soucie moins qu\u2019un framework soit à la mode et davantage de savoir si le flux d\u2019authentification, le modèle de données et le pipeline de déploiement tiennent quand quelqu\u2019un d\u2019autre que moi y touche.',
+    cardsTitle: 'Sur quoi je me concentre',
+    cards: [
+      {
+        title: 'Livraison full-stack',
+        desc: 'Front-ends Angular connectés à des API Spring Boot, avec une vraie authentification — pas un écran de connexion factice.',
+      },
+      {
+        title: 'Identité & accès',
+        desc: 'Authentification via Keycloak et interfaces sensibles aux rôles, car la plupart des outils d\u2019administration vivent ou meurent sur les permissions.',
+      },
+      {
+        title: 'Prêt à déployer',
+        desc: 'Docker Compose pour la parité en local, GitHub Actions pour le CI/CD — la plomberie ennuyeuse mais bien faite.',
+      },
+      {
+        title: 'Multilingue de nature',
+        desc: 'Arabe, italien, français et anglais — utile pour les équipes européennes et pour parler aux vrais utilisateurs.',
+      },
+    ],
+  },
+  skills: {
+    eyebrow: 'Stack',
+    title: 'Ce que j\u2019utilise vraiment',
+    subtitle:
+      'Sans exagération. Voici la stack avec laquelle j\u2019ai livré, filtrable par domaine — plus une section séparée plus bas pour ce que j\u2019apprends actuellement.',
+    filters: {
+      all: 'Tout',
+      languages: 'Langages',
+      frontend: 'Frontend',
+      backend: 'Backend',
+      data: 'Données',
+      devops: 'DevOps',
+      security: 'Sécurité & Identité',
+      tools: 'Outils',
+    },
+    statusLabel: {
+      core: 'Principal',
+      working: 'Connaissance pratique',
+      learning: 'En apprentissage',
+    },
+  },
+  journey: {
+    eyebrow: 'Parcours',
+    title: 'Formation et expérience, dans l\u2019ordre',
+    subtitle: 'Une ligne directe entre une salle de classe en Tunisie et des panneaux d\u2019administration Angular de niveau entreprise.',
+  },
+  experience: { title: 'Expérience' },
+  education: { title: 'Formation' },
+  projects: {
+    eyebrow: 'Projets',
+    title: 'Ce que j\u2019ai réellement construit',
+    subtitle:
+      'Un projet phare sur lequel je travaille activement, plus des travaux académiques et personnels qui montrent de la polyvalence. Rien ici n\u2019est du vent.',
+    filters: {
+      all: 'Tous',
+      flagship: 'Phare',
+      academic: 'Académique',
+      personal: 'Personnel',
+    },
+    viewDetails: 'Voir les détails',
+    backToProjects: 'Retour aux projets',
+    technologies: 'Technologies',
+    features: 'Fonctionnalités',
+    problem: 'Le problème',
+    approach: 'L\u2019approche',
+    status: 'Statut',
+    links: 'Liens',
+    noRepo: 'Lien du dépôt à venir',
+  },
+  learning: {
+    eyebrow: 'En apprentissage',
+    title: 'Ce que j\u2019apprends ensuite — et honnêtement, pas encore en prod',
+    subtitle:
+      'Je préfère vous dire ce que je ne sais pas encore plutôt que de gonfler une liste de compétences. C\u2019est actif, pas aspirationnel.',
+  },
+  contact: {
+    eyebrow: 'Contact',
+    title: 'Parlons d\u2019un poste junior',
+    subtitle:
+      'Je recherche des postes de Développeur Full-Stack ou Frontend Junior en Europe. Si votre équipe travaille avec Angular, Spring Boot, ou est ouverte à quelqu\u2019un qui les apprend, contactez-moi.',
+    email: 'Email',
+    linkedin: 'LinkedIn',
+    github: 'GitHub',
+    location: 'Basé à Pesaro, Italie — ouvert au remote et à la relocalisation',
+  },
+  footer: {
+    tagline: 'Ingénieur Full-Stack — Angular · Spring Boot · Keycloak · Docker',
+    rights: 'Réalisé par Yessin Rezgui.',
+    backToTop: 'Retour en haut',
+  },
+  theme: { dark: 'Sombre', light: 'Clair' },
+  common: {
+    inProgress: 'En cours',
+    complete: 'Terminé',
+    academicProject: 'Projet académique',
+    personalProject: 'Projet personnel',
+    flagshipProject: 'Projet phare',
+  },
+};

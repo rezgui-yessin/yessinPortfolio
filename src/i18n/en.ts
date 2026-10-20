@@ -1,0 +1,132 @@
+export const en = {
+  nav: {
+    home: 'Home',
+    about: 'About',
+    skills: 'Stack',
+    journey: 'Journey',
+    projects: 'Projects',
+    learning: 'Learning',
+    contact: 'Contact',
+    resume: 'Résumé',
+  },
+  hero: {
+    eyebrow: 'Full-Stack Engineer, Pesaro / Remote',
+    title1: 'I build the systems',
+    title2: 'behind the interface.',
+    subtitle:
+      'Final-year MSc student building production-style full-stack applications — Angular on the front, Spring Boot and Keycloak underneath, shipped with Docker and CI/CD.',
+    cta1: 'See the work',
+    cta2: 'Get in touch',
+    cta3: 'Download résumé',
+    diagramLabel: 'System I actually build',
+  },
+  about: {
+    eyebrow: 'About',
+    title: 'From the shop floor to the server room',
+    p1: "I'm Yessin — a final-year MSc student in Computer Science and Digital Innovation at the University of Urbino Carlo Bo, based in Pesaro, Italy. Before software, I spent years in retail management and customer service in Tunisia, which is where I actually learned how systems fail: not in the code, but in the handoffs between people.",
+    p2: 'That instinct shows up in how I build now — I care less about a framework being trendy and more about whether the auth flow, the data model, and the deploy pipeline hold up when someone other than me touches them.',
+    cardsTitle: 'What I focus on',
+    cards: [
+      {
+        title: 'Full-stack delivery',
+        desc: 'Angular front ends wired to Spring Boot APIs, with a real auth story — not a mocked login screen.',
+      },
+      {
+        title: 'Identity & access',
+        desc: 'Keycloak-backed authentication and role-aware UIs, because most admin tools live or die on permissions.',
+      },
+      {
+        title: 'Shippable by default',
+        desc: 'Docker Compose for local parity, GitHub Actions for CI/CD — the boring plumbing done properly.',
+      },
+      {
+        title: 'Multilingual by background',
+        desc: 'Arabic, Italian, French and English — useful for European teams and for talking to actual users.',
+      },
+    ],
+  },
+  skills: {
+    eyebrow: 'Stack',
+    title: 'What I actually use',
+    subtitle:
+      "No padding. This is the stack I've shipped with, filterable by area — plus a separate section further down for what I'm currently learning.",
+    filters: {
+      all: 'All',
+      languages: 'Languages',
+      frontend: 'Frontend',
+      backend: 'Backend',
+      data: 'Data',
+      devops: 'DevOps',
+      security: 'Security & Identity',
+      tools: 'Tools',
+    },
+    statusLabel: {
+      core: 'Core',
+      working: 'Working knowledge',
+      learning: 'Learning',
+    },
+  },
+  journey: {
+    eyebrow: 'Journey',
+    title: 'Education and experience, in order',
+    subtitle: 'A straight line from a Tunisian classroom to enterprise-style Angular admin panels.',
+  },
+  experience: {
+    title: 'Experience',
+  },
+  education: {
+    title: 'Education',
+  },
+  projects: {
+    eyebrow: 'Projects',
+    title: 'Things I have actually built',
+    subtitle:
+      "One flagship project I'm actively building, plus academic and personal work that shows range. Nothing here is vaporware.",
+    filters: {
+      all: 'All',
+      flagship: 'Flagship',
+      academic: 'Academic',
+      personal: 'Personal',
+    },
+    viewDetails: 'View details',
+    backToProjects: 'Back to projects',
+    technologies: 'Technologies',
+    features: 'Features',
+    problem: 'The problem',
+    approach: 'The approach',
+    status: 'Status',
+    links: 'Links',
+    noRepo: 'Repository link coming soon',
+  },
+  learning: {
+    eyebrow: 'Currently learning',
+    title: "What I'm learning next — and honestly, not shipping with yet",
+    subtitle:
+      "I'd rather tell you what I don't know yet than pad a skills list. These are active, not aspirational.",
+  },
+  contact: {
+    eyebrow: 'Contact',
+    title: "Let's talk about a junior role",
+    subtitle:
+      "I'm looking for Junior Full-Stack or Frontend Developer roles across Europe. If your team works in Angular, Spring Boot, or is open to someone who does, I'd like to hear from you.",
+    email: 'Email',
+    linkedin: 'LinkedIn',
+    github: 'GitHub',
+    location: 'Based in Pesaro, Italy — open to remote and relocation',
+  },
+  footer: {
+    tagline: 'Full-Stack Engineer — Angular · Spring Boot · Keycloak · Docker',
+    rights: 'Built by Yessin Rezgui.',
+    backToTop: 'Back to top',
+  },
+  theme: { dark: 'Dark', light: 'Light' },
+  common: {
+    inProgress: 'In progress',
+    complete: 'Complete',
+    academicProject: 'Academic project',
+    personalProject: 'Personal project',
+    flagshipProject: 'Flagship project',
+  },
+};
+
+export type Dictionary = typeof en;
