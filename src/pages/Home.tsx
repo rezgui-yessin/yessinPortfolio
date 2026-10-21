@@ -1,13 +1,30 @@
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+
+// Above-the-fold: load eagerly
 import { Hero } from '../components/hero/Hero';
 import { About } from '../components/about/About';
-import { Skills } from '../components/skills/Skills';
-import { Certifications } from '../components/certifications/Certifications';
-import { Journey } from '../components/journey/Journey';
-import { Projects } from '../components/projects/Projects';
-import { Learning } from '../components/learning/Learning';
-import { Contact } from '../components/contact/Contact';
+
+// Below-the-fold sections: split into their own async chunks
+const Skills        = lazy(() => import('../components/skills/Skills').then((m) => ({ default: m.Skills })));
+const Certifications = lazy(() => import('../components/certifications/Certifications').then((m) => ({ default: m.Certifications })));
+const Journey       = lazy(() => import('../components/journey/Journey').then((m) => ({ default: m.Journey })));
+const Projects      = lazy(() => import('../components/projects/Projects').then((m) => ({ default: m.Projects })));
+const Learning      = lazy(() => import('../components/learning/Learning').then((m) => ({ default: m.Learning })));
+const Contact       = lazy(() => import('../components/contact/Contact').then((m) => ({ default: m.Contact })));
+
+/** Thin skeleton bar shown while a section chunk is loading */
+function SectionSkeleton() {
+  return (
+    <div className="px-5 py-20 md:py-28">
+      <div className="mx-auto max-w-6xl space-y-4 animate-pulse">
+        <div className="h-3 w-24 rounded bg-[color:var(--bp-line-strong)]" />
+        <div className="h-6 w-56 rounded bg-[color:var(--bp-line-strong)]" />
+        <div className="h-4 w-80 rounded bg-[color:var(--bp-line)]" />
+      </div>
+    </div>
+  );
+}
 
 export function Home() {
   const location = useLocation();
@@ -22,14 +39,30 @@ export function Home() {
 
   return (
     <>
+      {/* Always load Hero and About immediately (above the fold) */}
       <Hero />
       <About />
-      <Skills />
-      <Certifications />
-      <Journey />
-      <Projects />
-      <Learning />
-      <Contact />
+
+      {/* Lazy-loaded sections — each resolves independently */}
+      <Suspense fallback={<SectionSkeleton />}>
+        <Skills />
+      </Suspense>
+      <Suspense fallback={<SectionSkeleton />}>
+        <Certifications />
+      </Suspense>
+      <Suspense fallback={<SectionSkeleton />}>
+        <Journey />
+      </Suspense>
+      <Suspense fallback={<SectionSkeleton />}>
+        <Projects />
+      </Suspense>
+      <Suspense fallback={<SectionSkeleton />}>
+        <Learning />
+      </Suspense>
+      <Suspense fallback={<SectionSkeleton />}>
+        <Contact />
+      </Suspense>
     </>
   );
 }
+

@@ -1,19 +1,33 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiMail, FiLinkedin, FiGithub, FiMapPin, FiPhone, FiCopy, FiCheck, FiSend, FiLoader } from 'react-icons/fi';
+import { FiMail, FiLinkedin, FiGithub, FiMapPin, FiPhone, FiCopy, FiCheck, FiSend, FiLoader, FiAlertCircle, FiRefreshCw } from 'react-icons/fi';
 import { useI18n } from '../../i18n';
 import { social } from '../../data/social';
 import { SectionEyebrow } from '../about/About';
+
+const MAX_MSG = 1000;
+
+type FieldErrors = { name?: boolean; email?: boolean; message?: boolean };
 
 export function Contact() {
   const { t } = useI18n();
 
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+
+  const validate = (): boolean => {
+    const errs: FieldErrors = {};
+    if (!formData.name.trim()) errs.name = true;
+    if (!formData.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) errs.email = true;
+    if (!formData.message.trim()) errs.message = true;
+    setFieldErrors(errs);
+    return Object.keys(errs).length === 0;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) return;
+    if (!validate()) return;
 
     setStatus('sending');
 
@@ -38,6 +52,7 @@ export function Contact() {
       if (res.ok) {
         setStatus('success');
         setFormData({ name: '', email: '', message: '' });
+        setFieldErrors({});
       } else {
         // Fallback to mailto
         window.open(
@@ -46,6 +61,8 @@ export function Contact() {
           )}`
         );
         setStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+        setFieldErrors({});
       }
     } catch {
       // Offline / network fallback to mailto
@@ -55,8 +72,11 @@ export function Contact() {
         )}`
       );
       setStatus('success');
+      setFormData({ name: '', email: '', message: '' });
+      setFieldErrors({});
     }
   };
+
 
   return (
     <section id="contact" className="bp-grid px-5 py-20 md:py-28">
@@ -94,10 +114,17 @@ export function Contact() {
                   type="text"
                   required
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  onChange={(e) => { setFormData({ ...formData, name: e.target.value }); setFieldErrors((f) => ({ ...f, name: false })); }}
                   placeholder={t.contact.formNamePlaceholder}
-                  className="w-full rounded border border-[color:var(--bp-line-strong)] bg-[color:var(--bp-bg)] px-3.5 py-2.5 font-mono text-[13px] text-[color:var(--bp-ink)] placeholder-[color:var(--bp-ink-faint)] transition-colors focus:border-[color:var(--bp-cyan)] focus:outline-none"
+                  className={`w-full rounded border bg-[color:var(--bp-bg)] px-3.5 py-2.5 font-mono text-[13px] text-[color:var(--bp-ink)] placeholder-[color:var(--bp-ink-faint)] transition-colors focus:outline-none ${
+                    fieldErrors.name
+                      ? 'border-red-500/60 focus:border-red-400'
+                      : 'border-[color:var(--bp-line-strong)] focus:border-[color:var(--bp-cyan)]'
+                  }`}
                 />
+                {fieldErrors.name && (
+                  <p className="mt-1 font-mono text-[10px] text-red-400">Required</p>
+                )}
               </div>
 
               <div>
@@ -108,24 +135,48 @@ export function Contact() {
                   type="email"
                   required
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  onChange={(e) => { setFormData({ ...formData, email: e.target.value }); setFieldErrors((f) => ({ ...f, email: false })); }}
                   placeholder={t.contact.formEmailPlaceholder}
-                  className="w-full rounded border border-[color:var(--bp-line-strong)] bg-[color:var(--bp-bg)] px-3.5 py-2.5 font-mono text-[13px] text-[color:var(--bp-ink)] placeholder-[color:var(--bp-ink-faint)] transition-colors focus:border-[color:var(--bp-cyan)] focus:outline-none"
+                  className={`w-full rounded border bg-[color:var(--bp-bg)] px-3.5 py-2.5 font-mono text-[13px] text-[color:var(--bp-ink)] placeholder-[color:var(--bp-ink-faint)] transition-colors focus:outline-none ${
+                    fieldErrors.email
+                      ? 'border-red-500/60 focus:border-red-400'
+                      : 'border-[color:var(--bp-line-strong)] focus:border-[color:var(--bp-cyan)]'
+                  }`}
                 />
+                {fieldErrors.email && (
+                  <p className="mt-1 font-mono text-[10px] text-red-400">Valid email required</p>
+                )}
               </div>
 
               <div>
-                <label className="block font-mono text-[11px] uppercase tracking-wider text-[color:var(--bp-ink-faint)] mb-1.5">
-                  {t.contact.formMessage} *
-                </label>
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="block font-mono text-[11px] uppercase tracking-wider text-[color:var(--bp-ink-faint)]">
+                    {t.contact.formMessage} *
+                  </label>
+                  <span className={`font-mono text-[10px] tabular-nums ${
+                    formData.message.length > MAX_MSG * 0.9
+                      ? 'text-[color:var(--bp-amber)]'
+                      : 'text-[color:var(--bp-ink-faint)]'
+                  }`}>
+                    {formData.message.length} / {MAX_MSG}
+                  </span>
+                </div>
                 <textarea
                   required
                   rows={4}
+                  maxLength={MAX_MSG}
                   value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  onChange={(e) => { setFormData({ ...formData, message: e.target.value }); setFieldErrors((f) => ({ ...f, message: false })); }}
                   placeholder={t.contact.formMessagePlaceholder}
-                  className="w-full resize-none rounded border border-[color:var(--bp-line-strong)] bg-[color:var(--bp-bg)] px-3.5 py-2.5 font-mono text-[13px] text-[color:var(--bp-ink)] placeholder-[color:var(--bp-ink-faint)] transition-colors focus:border-[color:var(--bp-cyan)] focus:outline-none"
+                  className={`w-full resize-none rounded border bg-[color:var(--bp-bg)] px-3.5 py-2.5 font-mono text-[13px] text-[color:var(--bp-ink)] placeholder-[color:var(--bp-ink-faint)] transition-colors focus:outline-none ${
+                    fieldErrors.message
+                      ? 'border-red-500/60 focus:border-red-400'
+                      : 'border-[color:var(--bp-line-strong)] focus:border-[color:var(--bp-cyan)]'
+                  }`}
                 />
+                {fieldErrors.message && (
+                  <p className="mt-1 font-mono text-[10px] text-red-400">Required</p>
+                )}
               </div>
 
               <div className="pt-1">
@@ -154,10 +205,20 @@ export function Contact() {
                 <motion.div
                   initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="flex items-center gap-2 rounded border border-[color:var(--bp-good)]/40 bg-[color:var(--bp-good)]/10 p-3 font-mono text-xs text-[color:var(--bp-good)]"
+                  className="space-y-3"
                 >
-                  <FiCheck size={14} className="shrink-0" />
-                  <span>{t.contact.sentSuccess}</span>
+                  <div className="flex items-center gap-2 rounded border border-[color:var(--bp-good)]/40 bg-[color:var(--bp-good)]/10 p-3 font-mono text-xs text-[color:var(--bp-good)]">
+                    <FiCheck size={14} className="shrink-0" />
+                    <span>{t.contact.sentSuccess}</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setStatus('idle')}
+                    className="flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wide text-[color:var(--bp-ink-faint)] transition-colors hover:text-[color:var(--bp-cyan-bright)]"
+                  >
+                    <FiRefreshCw size={11} />
+                    Send another message
+                  </button>
                 </motion.div>
               )}
             </form>

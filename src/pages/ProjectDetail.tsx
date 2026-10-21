@@ -15,11 +15,37 @@ export function ProjectDetail() {
   const { id } = useParams();
   const { t, tx } = useI18n();
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
   const project = projects.find((p) => p.id === id);
+
+  const openLightbox = (src: string) => {
+    setLightboxSrc(src);
+    setLightboxOpen(true);
+  };
+
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+    setLightboxSrc(null);
+  };
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
   }, [id]);
+
+  // Close lightbox with Escape key and lock body scroll
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => { if (e.key === 'Escape') closeLightbox(); };
+    if (lightboxOpen) {
+      window.addEventListener('keydown', handleKey);
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      window.removeEventListener('keydown', handleKey);
+      document.body.style.overflow = '';
+    };
+  }, [lightboxOpen]);
 
   if (!project) return <Navigate to="/" replace />;
 
@@ -64,13 +90,14 @@ export function ProjectDetail() {
           {/* Project Screenshot Showcase */}
           {project.image && (
             <div
-              onClick={() => setLightboxOpen(true)}
+              onClick={() => openLightbox(project.image!)}
               className="group relative mt-8 aspect-[16/10] w-full overflow-hidden rounded-lg border border-[color:var(--bp-line)] bg-[color:var(--bp-bg-card)] cursor-pointer shadow-xl transition-all hover:border-[color:var(--bp-line-strong)]"
             >
               <img
                 src={project.image}
                 alt={project.title}
                 className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-102"
+                loading="lazy"
               />
               <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 backdrop-blur-[2px] transition-opacity duration-200 group-hover:opacity-100">
                 <span className="flex items-center gap-1.5 rounded-full border border-white/30 bg-black/80 px-4 py-2 font-mono text-xs text-white shadow-xl backdrop-blur-sm">
@@ -78,6 +105,29 @@ export function ProjectDetail() {
                   <span>Click to view full screenshot</span>
                 </span>
               </div>
+            </div>
+          )}
+
+          {/* Additional screenshots strip */}
+          {project.screenshots && project.screenshots.length > 0 && (
+            <div className="mt-3 grid grid-cols-3 gap-2">
+              {project.screenshots.map((src, i) => (
+                <div
+                  key={i}
+                  onClick={() => openLightbox(src)}
+                  className="group relative aspect-[16/10] overflow-hidden rounded border border-[color:var(--bp-line)] bg-[color:var(--bp-bg-card)] cursor-pointer transition-all hover:border-[color:var(--bp-cyan)]"
+                >
+                  <img
+                    src={src}
+                    alt={`${project.title} screenshot ${i + 1}`}
+                    className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                    <FiMaximize2 size={16} className="text-white" />
+                  </div>
+                </div>
+              ))}
             </div>
           )}
 
@@ -192,12 +242,12 @@ export function ProjectDetail() {
 
         {/* Screenshot Lightbox Modal */}
         <AnimatePresence>
-          {lightboxOpen && project.image && (
+          {lightboxOpen && lightboxSrc && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setLightboxOpen(false)}
+              onClick={closeLightbox}
               className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
             >
               <motion.div
@@ -212,14 +262,14 @@ export function ProjectDetail() {
                     {project.title} — System Preview
                   </h3>
                   <button
-                    onClick={() => setLightboxOpen(false)}
+                    onClick={closeLightbox}
                     className="rounded-full border border-[color:var(--bp-line)] p-1.5 text-[color:var(--bp-ink-dim)] hover:border-[color:var(--bp-line-strong)] hover:text-[color:var(--bp-ink)]"
                   >
                     <FiX size={18} />
                   </button>
                 </div>
                 <div className="mt-3 max-h-[75vh] overflow-auto rounded border border-[color:var(--bp-line)]">
-                  <img src={project.image} alt={project.title} className="h-auto w-full object-contain" />
+                  <img src={lightboxSrc} alt={project.title} className="h-auto w-full object-contain" />
                 </div>
               </motion.div>
             </motion.div>
