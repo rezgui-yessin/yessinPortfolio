@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { FiArrowUp } from 'react-icons/fi';
 import { useI18n } from '../../i18n';
 
@@ -15,13 +16,15 @@ export function Footer() {
           <span className="font-mono text-[11px] text-[color:var(--bp-ink-faint)]">
             &copy; {new Date().getFullYear()} — {t.footer.rights}
           </span>
-          <button
+          <motion.button
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="flex items-center gap-1.5 rounded border border-[color:var(--bp-line)] px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-wide text-[color:var(--bp-ink-faint)] transition-colors hover:text-[color:var(--bp-ink)]"
+            className="flex items-center gap-1.5 rounded border border-[color:var(--bp-line)] px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-wide text-[color:var(--bp-ink-faint)] transition-colors hover:border-[color:var(--bp-cyan)] hover:text-[color:var(--bp-cyan-bright)]"
           >
             <FiArrowUp size={11} />
             {t.footer.backToTop}
-          </button>
+          </motion.button>
         </div>
       </div>
     </footer>

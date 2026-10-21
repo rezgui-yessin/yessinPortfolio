@@ -7,7 +7,11 @@ import { Home } from './pages/Home';
 import { ProjectDetail } from './pages/ProjectDetail';
 import { NotFound } from './pages/NotFound';
 
+import { useSmoothScroll } from './hooks/useSmoothScroll';
+
 export default function App() {
+  useSmoothScroll();
+
   return (
     <ThemeProvider>
       <I18nProvider>

@@ -33,6 +33,7 @@ export function Certifications() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-30px' }}
                 transition={{ duration: 0.35, delay: (i % 6) * 0.06 }}
+                whileHover={{ y: -4 }}
                 className="group flex flex-col justify-between overflow-hidden rounded-xl border border-[color:var(--bp-line)] bg-[color:var(--bp-bg-card)] transition-all hover:border-[color:var(--bp-line-strong)] hover:shadow-lg"
               >
                 <div>

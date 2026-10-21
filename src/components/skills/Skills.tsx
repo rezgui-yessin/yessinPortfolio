@@ -27,12 +27,24 @@ export function Skills() {
     <section id="skills" className="border-b border-[color:var(--bp-line)] px-5 py-20 md:py-28">
       <div className="mx-auto max-w-6xl">
         <SectionEyebrow n="02" label={t.skills.eyebrow} />
-        <h2 className="mt-4 font-display text-2xl font-semibold tracking-tight text-[color:var(--bp-ink)] md:text-3xl">
+        <motion.h2
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="mt-4 font-display text-2xl font-semibold tracking-tight text-[color:var(--bp-ink)] md:text-3xl"
+        >
           {t.skills.title}
-        </h2>
-        <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-[color:var(--bp-ink-dim)]">
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+          className="mt-3 max-w-xl text-[15px] leading-relaxed text-[color:var(--bp-ink-dim)]"
+        >
           {t.skills.subtitle}
-        </p>
+        </motion.p>
 
         <div className="mt-8 flex flex-wrap gap-2">
           <FilterChip active={filter === 'all'} onClick={() => setFilter('all')} label={t.skills.filters.all} />
@@ -48,21 +60,28 @@ export function Skills() {
 
         <motion.div layout className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
           <AnimatePresence mode="popLayout">
-            {filtered.map((skill) => {
+            {filtered.map((skill, i) => {
               const Icon = getIcon(skill.icon);
               return (
                 <motion.div
                   layout
                   key={skill.name}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.25 }}
-                  className="group relative flex flex-col items-start gap-3 rounded-md border border-[color:var(--bp-line)] bg-[color:var(--bp-bg-card)] p-4 transition-colors hover:border-[color:var(--bp-line-strong)]"
+                  initial={{ opacity: 0, scale: 0.92, y: 8 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.92, y: -8 }}
+                  transition={{ duration: 0.25, delay: (i % 8) * 0.02 }}
+                  whileHover={{ y: -3, scale: 1.025 }}
+                  className="group relative flex flex-col items-start gap-3 rounded-md border border-[color:var(--bp-line)] bg-[color:var(--bp-bg-card)] p-4 transition-all hover:border-[color:var(--bp-line-strong)] hover:shadow-md cursor-default"
                 >
-                  <Icon size={22} className="text-[color:var(--bp-ink-dim)] transition-colors group-hover:text-[color:var(--bp-cyan-bright)]" />
+                  <motion.div
+                    whileHover={{ scale: 1.15, rotate: 2 }}
+                    transition={{ type: 'spring', stiffness: 350, damping: 20 }}
+                    className="text-[color:var(--bp-ink-dim)] transition-colors group-hover:text-[color:var(--bp-cyan-bright)]"
+                  >
+                    <Icon size={22} />
+                  </motion.div>
                   <div>
-                    <div className="font-display text-[13px] font-medium text-[color:var(--bp-ink)]">
+                    <div className="font-display text-[13px] font-medium text-[color:var(--bp-ink)] transition-colors group-hover:text-[color:var(--bp-cyan-bright)]">
                       {skill.name}
                     </div>
                     <div
@@ -84,15 +103,17 @@ export function Skills() {
 
 function FilterChip({ active, onClick, label }: { active: boolean; onClick: () => void; label: string }) {
   return (
-    <button
+    <motion.button
+      whileTap={{ scale: 0.95 }}
+      whileHover={{ y: -1 }}
       onClick={onClick}
       className={`rounded-full border px-3 py-1.5 font-mono text-[11px] uppercase tracking-wide transition-colors ${
         active
-          ? 'border-[color:var(--bp-cyan)] bg-[color:var(--bp-cyan)]/15 text-[color:var(--bp-cyan-bright)]'
+          ? 'border-[color:var(--bp-cyan)] bg-[color:var(--bp-cyan)]/15 text-[color:var(--bp-cyan-bright)] shadow-xs'
           : 'border-[color:var(--bp-line)] text-[color:var(--bp-ink-faint)] hover:text-[color:var(--bp-ink)]'
       }`}
     >
       {label}
-    </button>
+    </motion.button>
   );
 }

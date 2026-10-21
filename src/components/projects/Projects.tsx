@@ -24,26 +24,40 @@ export function Projects() {
     <section id="projects" className="border-b border-[color:var(--bp-line)] px-5 py-20 md:py-28">
       <div className="mx-auto max-w-6xl">
         <SectionEyebrow n="05" label={t.projects.eyebrow} />
-        <h2 className="mt-4 font-display text-2xl font-semibold tracking-tight text-[color:var(--bp-ink)] md:text-3xl">
+        <motion.h2
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="mt-4 font-display text-2xl font-semibold tracking-tight text-[color:var(--bp-ink)] md:text-3xl"
+        >
           {t.projects.title}
-        </h2>
-        <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-[color:var(--bp-ink-dim)]">
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+          className="mt-3 max-w-xl text-[15px] leading-relaxed text-[color:var(--bp-ink-dim)]"
+        >
           {t.projects.subtitle}
-        </p>
+        </motion.p>
 
         <div className="mt-8 flex flex-wrap gap-2">
           {(['all', ...kinds] as const).map((k) => (
-            <button
+            <motion.button
               key={k}
+              whileTap={{ scale: 0.95 }}
+              whileHover={{ y: -1 }}
               onClick={() => setFilter(k)}
               className={`rounded-full border px-3 py-1.5 font-mono text-[11px] uppercase tracking-wide transition-colors ${
                 filter === k
-                  ? 'border-[color:var(--bp-cyan)] bg-[color:var(--bp-cyan)]/15 text-[color:var(--bp-cyan-bright)]'
+                  ? 'border-[color:var(--bp-cyan)] bg-[color:var(--bp-cyan)]/15 text-[color:var(--bp-cyan-bright)] shadow-xs'
                   : 'border-[color:var(--bp-line)] text-[color:var(--bp-ink-faint)] hover:text-[color:var(--bp-ink)]'
               }`}
             >
               {t.projects.filters[k]}
-            </button>
+            </motion.button>
           ))}
         </div>
 

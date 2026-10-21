@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FiArrowUpRight } from 'react-icons/fi';
@@ -13,44 +14,73 @@ const kindStyle: Record<Project['kind'], { color: string; labelKey: 'technicalPr
 export function ProjectCard({ project, index }: { project: Project; index: number }) {
   const { t, tx } = useI18n();
   const style = kindStyle[project.kind];
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [hovered, setHovered] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
 
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, y: 14 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -8 }}
       transition={{ duration: 0.35, delay: (index % 6) * 0.05 }}
+      whileHover={{ y: -6, scale: 1.015 }}
+      className="h-full"
     >
       <Link
         to={`/projects/${project.id}`}
-        className="group flex h-full flex-col rounded-md border border-[color:var(--bp-line)] bg-[color:var(--bp-bg-card)] p-5 transition-colors hover:border-[color:var(--bp-line-strong)]"
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        className="group relative flex h-full flex-col overflow-hidden rounded-md border border-[color:var(--bp-line)] bg-[color:var(--bp-bg-card)] p-5 transition-all duration-300 hover:border-[color:var(--bp-line-strong)] hover:shadow-xl"
       >
-        <div className="flex items-center justify-between">
+        {/* Subtle radial spotlight glow following pointer */}
+        {hovered && (
+          <div
+            className="pointer-events-none absolute -inset-px rounded-md opacity-100 transition-opacity duration-300"
+            style={{
+              background: `radial-gradient(320px circle at ${mousePos.x}px ${mousePos.y}px, rgba(90, 185, 232, 0.1), transparent 75%)`,
+            }}
+          />
+        )}
+
+        <div className="relative z-10 flex items-center justify-between">
           <span
-            className="rounded-full border px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide"
+            className="rounded-full border px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide transition-colors"
             style={{ borderColor: style.color, color: style.color }}
           >
             {project.company ? `${project.company} · ${t.common[style.labelKey]}` : t.common[style.labelKey]}
           </span>
-          <FiArrowUpRight
-            size={16}
-            className="text-[color:var(--bp-ink-faint)] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[color:var(--bp-cyan-bright)]"
-          />
+          <motion.div
+            className="text-[color:var(--bp-ink-faint)] transition-colors group-hover:text-[color:var(--bp-cyan-bright)]"
+            whileHover={{ x: 2, y: -2 }}
+          >
+            <FiArrowUpRight size={16} />
+          </motion.div>
         </div>
 
-        <h3 className="mt-4 font-display text-lg font-semibold text-[color:var(--bp-ink)]">{project.title}</h3>
-        <p className="mt-2 flex-1 text-[13px] leading-relaxed text-[color:var(--bp-ink-dim)]">
+        <h3 className="relative z-10 mt-4 font-display text-lg font-semibold text-[color:var(--bp-ink)] transition-colors group-hover:text-[color:var(--bp-cyan-bright)]">
+          {project.title}
+        </h3>
+        <p className="relative z-10 mt-2 flex-1 text-[13px] leading-relaxed text-[color:var(--bp-ink-dim)]">
           {tx(project.tagline)}
         </p>
 
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="relative z-10 mt-4 flex flex-wrap gap-2">
           {project.technologies.slice(0, 5).map((tech) => {
             const Icon = getIcon(techIconKey[tech] ?? '');
             return (
               <span
                 key={tech}
-                className="flex items-center gap-1 rounded border border-[color:var(--bp-line)] px-2 py-1 font-mono text-[10px] text-[color:var(--bp-ink-faint)]"
+                className="flex items-center gap-1 rounded border border-[color:var(--bp-line)] bg-[color:var(--bp-bg)] px-2 py-1 font-mono text-[10px] text-[color:var(--bp-ink-faint)] transition-colors group-hover:border-[color:var(--bp-line-strong)]"
               >
                 <Icon size={11} />
                 {tech}
@@ -59,7 +89,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
           })}
         </div>
 
-        <div className="mt-4 border-t border-[color:var(--bp-line)] pt-3 font-mono text-[11px] text-[color:var(--bp-ink-faint)]">
+        <div className="relative z-10 mt-4 border-t border-[color:var(--bp-line)] pt-3 font-mono text-[11px] text-[color:var(--bp-ink-faint)]">
           {tx(project.status)}
         </div>
       </Link>

@@ -25,13 +25,15 @@ export function ProjectDetail() {
   return (
     <div className="bp-grid px-5 py-14 md:py-20">
       <div className="mx-auto max-w-3xl">
-        <Link
-          to="/#projects"
-          className="mb-8 inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-wide text-[color:var(--bp-ink-faint)] transition-colors hover:text-[color:var(--bp-cyan-bright)]"
-        >
-          <FiArrowLeft size={13} />
-          {t.projects.backToProjects}
-        </Link>
+        <motion.div whileHover={{ x: -3 }}>
+          <Link
+            to="/#projects"
+            className="mb-8 inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-wide text-[color:var(--bp-ink-faint)] transition-colors hover:text-[color:var(--bp-cyan-bright)]"
+          >
+            <FiArrowLeft size={13} />
+            {t.projects.backToProjects}
+          </Link>
+        </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
           <span className="rounded-full border border-[color:var(--bp-cyan)] px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wide text-[color:var(--bp-cyan-bright)]">
@@ -133,7 +135,9 @@ export function ProjectDetail() {
 
             <section className="flex flex-wrap gap-3 border-t border-[color:var(--bp-line)] pt-6">
               {project.github ? (
-                <a
+                <motion.a
+                  whileHover={{ y: -2, scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -141,7 +145,7 @@ export function ProjectDetail() {
                 >
                   <FiGithub size={13} />
                   GitHub
-                </a>
+                </motion.a>
               ) : (
                 <span className="flex items-center gap-2 rounded border border-dashed border-[color:var(--bp-line)] px-3.5 py-2 font-mono text-[12px] uppercase tracking-wide text-[color:var(--bp-ink-faint)]">
                   <FiGithub size={13} />
@@ -149,7 +153,9 @@ export function ProjectDetail() {
                 </span>
               )}
               {project.demo && (
-                <a
+                <motion.a
+                  whileHover={{ y: -2, scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   href={project.demo}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -157,7 +163,7 @@ export function ProjectDetail() {
                 >
                   <FiExternalLink size={13} />
                   Live demo
-                </a>
+                </motion.a>
               )}
             </section>
           </div>

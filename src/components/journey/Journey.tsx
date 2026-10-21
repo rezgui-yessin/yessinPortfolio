@@ -25,37 +25,58 @@ export function Journey() {
     <section id="journey" className="border-b border-[color:var(--bp-line)] px-5 py-20 md:py-28">
       <div className="mx-auto max-w-4xl">
         <div className="text-center">
-          <div className="inline-flex items-center gap-3 font-mono text-[11px] uppercase tracking-widest text-[color:var(--bp-ink-faint)]">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-3 font-mono text-[11px] uppercase tracking-widest text-[color:var(--bp-ink-faint)]"
+          >
             <span className="text-[color:var(--bp-amber)]">04</span>
             <span className="h-px w-8 bg-[color:var(--bp-line-strong)]" />
             {t.journey.eyebrow}
-          </div>
-          <h2 className="mt-4 font-display text-2xl font-semibold tracking-tight text-[color:var(--bp-ink)] md:text-3xl">
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
+            className="mt-4 font-display text-2xl font-semibold tracking-tight text-[color:var(--bp-ink)] md:text-3xl"
+          >
             {t.journey.title}
-          </h2>
-          <p className="mx-auto mt-3 max-w-xl text-[15px] leading-relaxed text-[color:var(--bp-ink-dim)]">
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="mx-auto mt-3 max-w-xl text-[15px] leading-relaxed text-[color:var(--bp-ink-dim)]"
+          >
             {t.journey.subtitle}
-          </p>
+          </motion.p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-2">
             {(['all', ...kinds] as const).map((k) => (
-              <button
+              <motion.button
                 key={k}
+                whileTap={{ scale: 0.95 }}
+                whileHover={{ y: -1 }}
                 onClick={() => setFilter(k)}
                 className={`rounded-full border px-3 py-1.5 font-mono text-[11px] uppercase tracking-wide transition-colors ${
                   filter === k
-                    ? 'border-[color:var(--bp-cyan)] bg-[color:var(--bp-cyan)]/15 text-[color:var(--bp-cyan-bright)]'
+                    ? 'border-[color:var(--bp-cyan)] bg-[color:var(--bp-cyan)]/15 text-[color:var(--bp-cyan-bright)] shadow-xs'
                     : 'border-[color:var(--bp-line)] text-[color:var(--bp-ink-faint)] hover:text-[color:var(--bp-ink)]'
                 }`}
               >
                 {t.journey.filters[k]}
-              </button>
+              </motion.button>
             ))}
           </div>
         </div>
 
         <div className="relative mx-auto mt-12 max-w-3xl pl-8 sm:pl-10">
-          <div className="absolute top-3 bottom-3 left-[9px] w-px bg-[color:var(--bp-line-strong)]" />
+          {/* Animated vertical connecting line */}
+          <div className="absolute top-3 bottom-3 left-[9px] w-px bg-gradient-to-b from-[color:var(--bp-cyan)] via-[color:var(--bp-amber)] to-[color:var(--bp-line-strong)]" />
+
           <motion.div layout className="flex flex-col gap-6">
             <AnimatePresence mode="popLayout">
               {filtered.map((entry, i) => {
@@ -64,21 +85,23 @@ export function Journey() {
                   <motion.div
                     key={entry.id}
                     layout
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, y: 18, x: -6 }}
+                    whileInView={{ opacity: 1, y: 0, x: 0 }}
+                    viewport={{ once: true, margin: '-50px' }}
                     exit={{ opacity: 0, scale: 0.96 }}
-                    transition={{ duration: 0.35, delay: i * 0.04 }}
-                    className="relative rounded-lg border border-[color:var(--bp-line)] bg-[color:var(--bp-bg-card)] p-5 sm:p-6 transition-all hover:border-[color:var(--bp-line-strong)]"
+                    transition={{ duration: 0.4, delay: i * 0.05 }}
+                    whileHover={{ y: -3, scale: 1.01 }}
+                    className="relative rounded-lg border border-[color:var(--bp-line)] bg-[color:var(--bp-bg-card)] p-5 sm:p-6 transition-all hover:border-[color:var(--bp-line-strong)] hover:shadow-lg"
                   >
                     <span
-                      className="absolute top-6 -left-[27px] sm:-left-[35px] flex h-4 w-4 items-center justify-center rounded-full border-2"
+                      className="absolute top-6 -left-[27px] sm:-left-[35px] flex h-4 w-4 items-center justify-center rounded-full border-2 transition-transform duration-300 group-hover:scale-125"
                       style={{
                         borderColor: entry.kind === 'work' ? 'var(--bp-amber)' : 'var(--bp-cyan)',
                         background: 'var(--bp-bg)',
                       }}
                     >
                       <span
-                        className="h-1.5 w-1.5 rounded-full"
+                        className="h-1.5 w-1.5 rounded-full animate-pulse"
                         style={{
                           background: entry.kind === 'work' ? 'var(--bp-amber)' : 'var(--bp-cyan)',
                         }}
@@ -124,7 +147,7 @@ export function Journey() {
                       {entry.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="rounded border border-[color:var(--bp-line)] bg-[color:var(--bp-bg)] px-2 py-0.5 font-mono text-[10px] text-[color:var(--bp-ink-faint)]"
+                          className="rounded border border-[color:var(--bp-line)] bg-[color:var(--bp-bg)] px-2 py-0.5 font-mono text-[10px] text-[color:var(--bp-ink-faint)] transition-colors hover:border-[color:var(--bp-line-strong)] hover:text-[color:var(--bp-ink)]"
                         >
                           {tag}
                         </span>

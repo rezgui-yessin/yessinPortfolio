@@ -78,26 +78,37 @@ export function Navbar() {
         </Link>
 
         <div className="hidden items-center gap-1 md:flex">
-          {sections.map((s) => (
-            <button
-              key={s.id}
-              onClick={() => goToSection(s.id)}
-              className={`rounded px-3 py-1.5 font-mono text-[12px] uppercase tracking-wide transition-colors ${
-                active === s.id
-                  ? 'text-[color:var(--bp-cyan-bright)]'
-                  : 'text-[color:var(--bp-ink-dim)] hover:text-[color:var(--bp-ink)]'
-              }`}
-            >
-              {t.nav[s.key]}
-            </button>
-          ))}
+          {sections.map((s) => {
+            const isActive = active === s.id;
+            return (
+              <button
+                key={s.id}
+                onClick={() => goToSection(s.id)}
+                className={`relative rounded px-3 py-1.5 font-mono text-[12px] uppercase tracking-wide transition-colors ${
+                  isActive
+                    ? 'text-[color:var(--bp-cyan-bright)]'
+                    : 'text-[color:var(--bp-ink-dim)] hover:text-[color:var(--bp-ink)]'
+                }`}
+              >
+                {isActive && (
+                  <motion.span
+                    layoutId="navbar-active-pill"
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    className="absolute inset-0 -z-10 rounded border border-[color:var(--bp-cyan)]/30 bg-[color:var(--bp-cyan)]/10"
+                  />
+                )}
+                {t.nav[s.key]}
+              </button>
+            );
+          })}
         </div>
 
         <div className="hidden items-center gap-3 md:flex">
           <div className="flex items-center rounded border border-[color:var(--bp-line)] font-mono text-[11px]">
             {langs.map((l) => (
-              <button
+              <motion.button
                 key={l}
+                whileTap={{ scale: 0.94 }}
                 onClick={() => setLang(l)}
                 aria-pressed={lang === l}
                 className={`px-2 py-1 uppercase transition-colors ${
@@ -107,26 +118,30 @@ export function Navbar() {
                 }`}
               >
                 {l}
-              </button>
+              </motion.button>
             ))}
           </div>
-          <button
+          <motion.button
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.92 }}
             onClick={toggleTheme}
             aria-label={theme === 'dark' ? t.theme.light : t.theme.dark}
             className="rounded border border-[color:var(--bp-line)] p-1.5 text-[color:var(--bp-ink-dim)] transition-colors hover:text-[color:var(--bp-ink)]"
           >
             {theme === 'dark' ? <FiSun size={14} /> : <FiMoon size={14} />}
-          </button>
-          <a
+          </motion.button>
+          <motion.a
+            whileHover={{ y: -1, scale: 1.02 }}
+            whileTap={{ scale: 0.96 }}
             href={`/cv/yessin-rezgui-cv-${lang}.pdf`}
             download={`yessin-rezgui-cv-${lang}.pdf`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 rounded border border-[color:var(--bp-line-strong)] px-3 py-1.5 font-mono text-[11px] uppercase tracking-wide text-[color:var(--bp-ink)] transition-colors hover:border-[color:var(--bp-cyan)] hover:text-[color:var(--bp-cyan-bright)]"
+            className="flex items-center gap-1.5 rounded border border-[color:var(--bp-line-strong)] px-3 py-1.5 font-mono text-[11px] uppercase tracking-wide text-[color:var(--bp-ink)] transition-colors hover:border-[color:var(--bp-cyan)] hover:text-[color:var(--bp-cyan-bright)] shadow-sm"
           >
             <FiDownload size={12} />
             {t.nav.resume}
-          </a>
+          </motion.a>
         </div>
 
         <button
