@@ -22,6 +22,7 @@ import {
   SiNginx,
   SiLinux,
   SiMongodb,
+  SiApachekafka,
 } from 'react-icons/si';
 import { TbCloud, TbApi, TbMessages, TbAward, TbCertificate, TbUsersGroup, TbRefreshDot } from 'react-icons/tb';
 
@@ -37,6 +38,8 @@ export const iconMap: Record<string, IconType> = {
   postgresql: SiPostgresql,
   mysql: SiMysql,
   mongodb: SiMongodb,
+  kafka: SiApachekafka,
+  apachekafka: SiApachekafka,
   docker: SiDocker,
   githubactions: SiGithubactions,
   git: SiGit,
@@ -64,6 +67,8 @@ export const techIconKey: Record<string, string> = {
   'Spring Boot': 'springboot',
   'Spring Security': 'springsecurity',
   'REST APIs': 'api',
+  Kafka: 'kafka',
+  'Apache Kafka': 'kafka',
   PostgreSQL: 'postgresql',
   MySQL: 'mysql',
   MongoDB: 'mongodb',

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiMail, FiLinkedin, FiGithub, FiMapPin, FiPhone, FiCopy, FiCheck } from 'react-icons/fi';
+import { FiMail, FiLinkedin, FiGithub, FiMapPin, FiPhone, FiCopy, FiCheck, FiSend, FiLoader } from 'react-icons/fi';
 import { useI18n } from '../../i18n';
 import { social } from '../../data/social';
 import { SectionEyebrow } from '../about/About';
@@ -8,11 +8,62 @@ import { SectionEyebrow } from '../about/About';
 export function Contact() {
   const { t } = useI18n();
 
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) return;
+
+    setStatus('sending');
+
+    try {
+      // Send message via Web3Forms (or fallback)
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: 'e394334f-22a2-4a0b-9dfc-5c8e03e54b6d', // Safe public submission access key
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          from_name: `${formData.name} (Portfolio Inquiry)`,
+          to_email: social.email,
+        }),
+      });
+
+      if (res.ok) {
+        setStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        // Fallback to mailto
+        window.open(
+          `mailto:${social.email}?subject=Inquiry from ${encodeURIComponent(formData.name)}&body=${encodeURIComponent(
+            formData.message + '\n\nFrom: ' + formData.email
+          )}`
+        );
+        setStatus('success');
+      }
+    } catch {
+      // Offline / network fallback to mailto
+      window.open(
+        `mailto:${social.email}?subject=Inquiry from ${encodeURIComponent(formData.name)}&body=${encodeURIComponent(
+          formData.message + '\n\nFrom: ' + formData.email
+        )}`
+      );
+      setStatus('success');
+    }
+  };
+
   return (
     <section id="contact" className="bp-grid px-5 py-20 md:py-28">
       <div className="mx-auto max-w-6xl">
         <SectionEyebrow n="07" label={t.contact.eyebrow} />
         <div className="mt-4 grid gap-10 md:grid-cols-[1.1fr_0.9fr] md:items-start">
+          {/* Left: Contact Form */}
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -25,12 +76,94 @@ export function Contact() {
             <p className="mt-4 max-w-md text-[15px] leading-relaxed text-[color:var(--bp-ink-dim)]">
               {t.contact.subtitle}
             </p>
-            <div className="mt-6 flex items-center gap-2 font-mono text-[12px] text-[color:var(--bp-ink-faint)]">
+            <div className="mt-4 flex items-center gap-2 font-mono text-[12px] text-[color:var(--bp-ink-faint)]">
               <FiMapPin size={13} className="text-[color:var(--bp-cyan)]" />
               {t.contact.location}
             </div>
+
+            {/* Interactive Form Card */}
+            <form
+              onSubmit={handleSubmit}
+              className="mt-8 rounded-lg border border-[color:var(--bp-line)] bg-[color:var(--bp-bg-card)] p-5 shadow-sm space-y-4"
+            >
+              <div>
+                <label className="block font-mono text-[11px] uppercase tracking-wider text-[color:var(--bp-ink-faint)] mb-1.5">
+                  {t.contact.formName} *
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  placeholder={t.contact.formNamePlaceholder}
+                  className="w-full rounded border border-[color:var(--bp-line-strong)] bg-[color:var(--bp-bg)] px-3.5 py-2.5 font-mono text-[13px] text-[color:var(--bp-ink)] placeholder-[color:var(--bp-ink-faint)] transition-colors focus:border-[color:var(--bp-cyan)] focus:outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="block font-mono text-[11px] uppercase tracking-wider text-[color:var(--bp-ink-faint)] mb-1.5">
+                  {t.contact.formEmail} *
+                </label>
+                <input
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  placeholder={t.contact.formEmailPlaceholder}
+                  className="w-full rounded border border-[color:var(--bp-line-strong)] bg-[color:var(--bp-bg)] px-3.5 py-2.5 font-mono text-[13px] text-[color:var(--bp-ink)] placeholder-[color:var(--bp-ink-faint)] transition-colors focus:border-[color:var(--bp-cyan)] focus:outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="block font-mono text-[11px] uppercase tracking-wider text-[color:var(--bp-ink-faint)] mb-1.5">
+                  {t.contact.formMessage} *
+                </label>
+                <textarea
+                  required
+                  rows={4}
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  placeholder={t.contact.formMessagePlaceholder}
+                  className="w-full resize-none rounded border border-[color:var(--bp-line-strong)] bg-[color:var(--bp-bg)] px-3.5 py-2.5 font-mono text-[13px] text-[color:var(--bp-ink)] placeholder-[color:var(--bp-ink-faint)] transition-colors focus:border-[color:var(--bp-cyan)] focus:outline-none"
+                />
+              </div>
+
+              <div className="pt-1">
+                <motion.button
+                  whileHover={{ y: -1, scale: 1.01 }}
+                  whileTap={{ scale: 0.98 }}
+                  type="submit"
+                  disabled={status === 'sending'}
+                  className="flex w-full items-center justify-center gap-2 rounded bg-[color:var(--bp-cyan)] py-2.5 font-mono text-[12px] uppercase tracking-wider text-[#06131F] font-semibold transition-shadow hover:shadow-[0_0_15px_rgba(90,185,232,0.4)] disabled:opacity-50"
+                >
+                  {status === 'sending' ? (
+                    <>
+                      <FiLoader size={14} className="animate-spin" />
+                      <span>{t.contact.sending}</span>
+                    </>
+                  ) : (
+                    <>
+                      <FiSend size={13} />
+                      <span>{t.contact.send}</span>
+                    </>
+                  )}
+                </motion.button>
+              </div>
+
+              {status === 'success' && (
+                <motion.div
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex items-center gap-2 rounded border border-[color:var(--bp-good)]/40 bg-[color:var(--bp-good)]/10 p-3 font-mono text-xs text-[color:var(--bp-good)]"
+                >
+                  <FiCheck size={14} className="shrink-0" />
+                  <span>{t.contact.sentSuccess}</span>
+                </motion.div>
+              )}
+            </form>
           </motion.div>
 
+          {/* Right: Direct Channels */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -38,6 +171,10 @@ export function Contact() {
             transition={{ duration: 0.45, delay: 0.1 }}
             className="flex flex-col gap-3"
           >
+            <h3 className="font-mono text-[11px] uppercase tracking-widest text-[color:var(--bp-ink-faint)] mb-1">
+              {t.contact.directLinks}
+            </h3>
+
             <ContactLink
               icon={<FiMail size={16} />}
               label={t.contact.email}

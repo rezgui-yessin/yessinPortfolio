@@ -55,6 +55,8 @@ export interface Project {
   demo?: string;
   architecture?: string[];
   company?: string;
+  image?: string;
+  screenshots?: string[];
 }
 
 export interface ExperienceEntry {

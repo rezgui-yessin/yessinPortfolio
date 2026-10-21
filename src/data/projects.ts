@@ -60,6 +60,7 @@ export const projects: Project[] = [
       fr: 'Terminé — interface moderne avec API REST évolutives.',
     },
     github: 'https://github.com/rezgui-yassine',
+    image: '/projects/hotel-management.svg',
     architecture: ['Angular (Client UI)', 'Spring Boot (REST APIs)', 'Spring Security (JWT)', 'PostgreSQL (Database)', 'Docker Container'],
   },
   {
@@ -121,6 +122,7 @@ export const projects: Project[] = [
       fr: 'Terminé — connexion sécurisée par rôles pour médecins, patients et administrateurs.',
     },
     github: 'https://github.com/rezgui-yassine',
+    image: '/projects/medical-scheduling.svg',
     architecture: ['Angular (Multi-Role Portal)', 'Spring Boot (Core REST APIs)', 'Spring Security (RBAC & JWT)', 'PostgreSQL', 'Docker'],
   },
   {
@@ -182,6 +184,7 @@ export const projects: Project[] = [
       fr: 'Terminé — tableau de bord admin pour restaurateurs pour gérer menus et commandes.',
     },
     github: 'https://github.com/rezgui-yassine',
+    image: '/projects/food-delivery.svg',
     architecture: ['Angular (Customer & Owner Portal)', 'Spring Boot (Catalog & Order APIs)', 'Spring Security (JWT)', 'MySQL (Database)', 'Docker Container'],
   },
   {
@@ -243,6 +246,7 @@ export const projects: Project[] = [
       fr: 'Terminé — design responsive et backend évolutif avec authentification basée sur les rôles.',
     },
     github: 'https://github.com/rezgui-yassine',
+    image: '/projects/ecommerce-store.svg',
     architecture: ['Angular 18 (Client Storefront & Admin)', 'Keycloak (Identity & Roles)', 'Spring Boot (API & Business Logic)', 'PostgreSQL (Data)', 'Docker / GitHub Actions'],
   },
   {
@@ -305,6 +309,7 @@ export const projects: Project[] = [
       fr: 'Terminé — interface intuitive avec des composants Angular avancés.',
     },
     github: 'https://github.com/rezgui-yassine',
+    image: '/projects/employee-management.svg',
     architecture: ['Angular (Enterprise HR Portal)', 'Spring Boot (RESTful Services)', 'Spring Data JPA', 'MySQL (Database)', 'Docker Container'],
   },
   {
@@ -367,6 +372,7 @@ export const projects: Project[] = [
       fr: 'Déployé — développé et lancé lors du stage de licence chez SFectoria.',
     },
     github: 'https://github.com/rezgui-yassine',
+    image: '/projects/elearning-platform.svg',
     architecture: ['Angular (Interactive Learner Portal)', 'Spring Boot (Course & Auth APIs)', 'WebSocket (Real-Time Chat)', 'PostgreSQL (Data)', 'Docker Container'],
   },
 ];

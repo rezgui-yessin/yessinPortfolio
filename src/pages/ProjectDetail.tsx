@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { FiArrowLeft, FiGithub, FiExternalLink } from 'react-icons/fi';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FiArrowLeft, FiGithub, FiExternalLink, FiMaximize2, FiX } from 'react-icons/fi';
 import { useI18n } from '../i18n';
 import { projects } from '../data/projects';
 import { getIcon, techIconKey } from '../data/iconMap';
@@ -14,6 +14,7 @@ const kindLabelKey = {
 export function ProjectDetail() {
   const { id } = useParams();
   const { t, tx } = useI18n();
+  const [lightboxOpen, setLightboxOpen] = useState(false);
   const project = projects.find((p) => p.id === id);
 
   useEffect(() => {
@@ -60,6 +61,26 @@ export function ProjectDetail() {
             })}
           </div>
 
+          {/* Project Screenshot Showcase */}
+          {project.image && (
+            <div
+              onClick={() => setLightboxOpen(true)}
+              className="group relative mt-8 aspect-[16/10] w-full overflow-hidden rounded-lg border border-[color:var(--bp-line)] bg-[color:var(--bp-bg-card)] cursor-pointer shadow-xl transition-all hover:border-[color:var(--bp-line-strong)]"
+            >
+              <img
+                src={project.image}
+                alt={project.title}
+                className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-102"
+              />
+              <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 backdrop-blur-[2px] transition-opacity duration-200 group-hover:opacity-100">
+                <span className="flex items-center gap-1.5 rounded-full border border-white/30 bg-black/80 px-4 py-2 font-mono text-xs text-white shadow-xl backdrop-blur-sm">
+                  <FiMaximize2 size={13} />
+                  <span>Click to view full screenshot</span>
+                </span>
+              </div>
+            </div>
+          )}
+
           <div className="mt-8 rounded-md border border-[color:var(--bp-line)] bg-[color:var(--bp-bg-card)] p-5">
             <h2 className="font-mono text-[11px] uppercase tracking-widest text-[color:var(--bp-ink-faint)]">
               {t.projects.status}
@@ -102,7 +123,7 @@ export function ProjectDetail() {
             {project.architecture && (
               <section>
                 <h2 className="font-mono text-[11px] uppercase tracking-widest text-[color:var(--bp-ink-faint)]">
-                  Architecture
+                  Architecture &amp; Flow
                 </h2>
                 <div className="mt-3 flex flex-wrap items-center gap-2 font-mono text-[12px] text-[color:var(--bp-ink)]">
                   {project.architecture.map((step, i) => (
@@ -144,7 +165,7 @@ export function ProjectDetail() {
                   className="flex items-center gap-2 rounded border border-[color:var(--bp-line-strong)] px-3.5 py-2 font-mono text-[12px] uppercase tracking-wide text-[color:var(--bp-ink)] transition-colors hover:border-[color:var(--bp-cyan)] hover:text-[color:var(--bp-cyan-bright)]"
                 >
                   <FiGithub size={13} />
-                  GitHub
+                  GitHub Repository
                 </motion.a>
               ) : (
                 <span className="flex items-center gap-2 rounded border border-dashed border-[color:var(--bp-line)] px-3.5 py-2 font-mono text-[12px] uppercase tracking-wide text-[color:var(--bp-ink-faint)]">
@@ -168,6 +189,42 @@ export function ProjectDetail() {
             </section>
           </div>
         </motion.div>
+
+        {/* Screenshot Lightbox Modal */}
+        <AnimatePresence>
+          {lightboxOpen && project.image && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setLightboxOpen(false)}
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
+            >
+              <motion.div
+                initial={{ scale: 0.95, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.95, opacity: 0 }}
+                onClick={(e) => e.stopPropagation()}
+                className="relative max-h-[92vh] max-w-5xl overflow-hidden rounded-xl border border-[color:var(--bp-line-strong)] bg-[color:var(--bp-bg)] p-4 shadow-2xl"
+              >
+                <div className="flex items-center justify-between border-b border-[color:var(--bp-line)] pb-3">
+                  <h3 className="font-display text-base font-semibold text-[color:var(--bp-ink)]">
+                    {project.title} — System Preview
+                  </h3>
+                  <button
+                    onClick={() => setLightboxOpen(false)}
+                    className="rounded-full border border-[color:var(--bp-line)] p-1.5 text-[color:var(--bp-ink-dim)] hover:border-[color:var(--bp-line-strong)] hover:text-[color:var(--bp-ink)]"
+                  >
+                    <FiX size={18} />
+                  </button>
+                </div>
+                <div className="mt-3 max-h-[75vh] overflow-auto rounded border border-[color:var(--bp-line)]">
+                  <img src={project.image} alt={project.title} className="h-auto w-full object-contain" />
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

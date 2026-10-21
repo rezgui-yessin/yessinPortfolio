@@ -16,6 +16,7 @@ export const skills: Skill[] = [
   // Backend
   { name: 'Spring Boot', category: 'backend', icon: 'springboot', status: 'core' },
   { name: 'Spring Security', category: 'backend', icon: 'springsecurity', status: 'working' },
+  { name: 'Apache Kafka', category: 'backend', icon: 'kafka', status: 'core' },
   { name: 'REST APIs', category: 'backend', icon: 'api', status: 'core' },
 
   // Data

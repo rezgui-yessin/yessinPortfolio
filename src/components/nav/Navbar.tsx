@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiMenu, FiX, FiMoon, FiSun, FiDownload } from 'react-icons/fi';
+import { FiMenu, FiX, FiMoon, FiSun, FiDownload, FiFileText } from 'react-icons/fi';
 import { useI18n } from '../../i18n';
 import { useTheme } from '../../hooks/useTheme';
+import { ResumeModal } from '../cv/ResumeModal';
 import type { Lang } from '../../types';
 
 const sections: { key: keyof ReturnType<typeof useI18n>['t']['nav']; id: string }[] = [
@@ -24,6 +25,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string>('');
+  const [cvOpen, setCvOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const isHome = location.pathname === '/';
@@ -130,6 +132,17 @@ export function Navbar() {
           >
             {theme === 'dark' ? <FiSun size={14} /> : <FiMoon size={14} />}
           </motion.button>
+          {/* CV Preview button — opens in-browser modal */}
+          <motion.button
+            whileHover={{ y: -1, scale: 1.02 }}
+            whileTap={{ scale: 0.96 }}
+            onClick={() => setCvOpen(true)}
+            className="flex items-center gap-1.5 rounded border border-[color:var(--bp-cyan)] bg-[color:var(--bp-cyan)]/10 px-3 py-1.5 font-mono text-[11px] uppercase tracking-wide text-[color:var(--bp-cyan-bright)] transition-colors hover:bg-[color:var(--bp-cyan)]/20 shadow-sm"
+          >
+            <FiFileText size={12} />
+            {t.nav.resume}
+          </motion.button>
+          {/* CV quick-download */}
           <motion.a
             whileHover={{ y: -1, scale: 1.02 }}
             whileTap={{ scale: 0.96 }}
@@ -137,10 +150,10 @@ export function Navbar() {
             download={`yessin-rezgui-cv-${lang}.pdf`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 rounded border border-[color:var(--bp-line-strong)] px-3 py-1.5 font-mono text-[11px] uppercase tracking-wide text-[color:var(--bp-ink)] transition-colors hover:border-[color:var(--bp-cyan)] hover:text-[color:var(--bp-cyan-bright)] shadow-sm"
+            title="Download PDF"
+            className="flex items-center rounded border border-[color:var(--bp-line-strong)] p-1.5 text-[color:var(--bp-ink-dim)] transition-colors hover:border-[color:var(--bp-cyan)] hover:text-[color:var(--bp-cyan-bright)] shadow-sm"
           >
-            <FiDownload size={12} />
-            {t.nav.resume}
+            <FiDownload size={13} />
           </motion.a>
         </div>
 
@@ -171,16 +184,25 @@ export function Navbar() {
                   {t.nav[s.key]}
                 </button>
               ))}
+              {/* Mobile: Preview CV */}
+              <button
+                onClick={() => { setOpen(false); setCvOpen(true); }}
+                className="mt-2 flex items-center justify-center gap-2 rounded border border-[color:var(--bp-cyan)] bg-[color:var(--bp-cyan)]/10 py-2 font-mono text-xs uppercase tracking-wide text-[color:var(--bp-cyan-bright)]"
+              >
+                <FiFileText size={14} />
+                {t.nav.resume}
+              </button>
+              {/* Mobile: Download PDF */}
               <a
                 href={`/cv/yessin-rezgui-cv-${lang}.pdf`}
                 download={`yessin-rezgui-cv-${lang}.pdf`}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setOpen(false)}
-                className="mt-2 flex items-center justify-center gap-2 rounded border border-[color:var(--bp-cyan)] py-2 font-mono text-xs uppercase tracking-wide text-[color:var(--bp-cyan-bright)]"
+                className="flex items-center justify-center gap-2 rounded border border-[color:var(--bp-line)] py-2 font-mono text-xs uppercase tracking-wide text-[color:var(--bp-ink-dim)]"
               >
                 <FiDownload size={14} />
-                {t.nav.resume}
+                Download PDF
               </a>
               <div className="mt-2 flex items-center justify-between border-t border-[color:var(--bp-line)] pt-3">
                 <div className="flex items-center rounded border border-[color:var(--bp-line)] font-mono text-[11px]">
@@ -207,6 +229,9 @@ export function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* CV Lightbox Modal */}
+      <ResumeModal isOpen={cvOpen} onClose={() => setCvOpen(false)} />
     </header>
   );
 }

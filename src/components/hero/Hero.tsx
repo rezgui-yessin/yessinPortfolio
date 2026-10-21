@@ -1,11 +1,14 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FiArrowRight, FiDownload } from 'react-icons/fi';
+import { FiArrowRight, FiFileText, FiDownload } from 'react-icons/fi';
 import { useI18n } from '../../i18n';
 import { SystemDiagram } from './SystemDiagram';
 import { HeroParticleCanvas } from './HeroParticleCanvas';
+import { ResumeModal } from '../cv/ResumeModal';
 
 export function Hero() {
   const { lang, t } = useI18n();
+  const [cvOpen, setCvOpen] = useState(false);
 
   const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
@@ -80,18 +83,15 @@ export function Hero() {
             >
               {t.hero.cta2}
             </motion.button>
-            <motion.a
+            <motion.button
               whileHover={{ y: -2, scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              href={`/cv/yessin-rezgui-cv-${lang}.pdf`}
-              download={`yessin-rezgui-cv-${lang}.pdf`}
-              target="_blank"
-              rel="noopener noreferrer"
+              onClick={() => setCvOpen(true)}
               className="flex items-center gap-2 px-2 py-2.5 font-mono text-[12px] uppercase tracking-wide text-[color:var(--bp-ink-faint)] transition-colors hover:text-[color:var(--bp-ink)]"
             >
-              <FiDownload size={13} />
+              <FiFileText size={13} />
               {t.hero.cta3}
-            </motion.a>
+            </motion.button>
           </motion.div>
         </div>
 
@@ -103,6 +103,9 @@ export function Hero() {
           <SystemDiagram />
         </motion.div>
       </div>
+
+      {/* CV Lightbox Modal */}
+      <ResumeModal isOpen={cvOpen} onClose={() => setCvOpen(false)} />
     </section>
   );
 }

@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="medBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#08101C"/>
+      <stop offset="100%" stop-color="#0E192B"/>
+    </linearGradient>
+    <linearGradient id="cardGradMed" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#13233A"/>
+      <stop offset="100%" stop-color="#0E192B"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#medBg)"/>
+  <rect width="800" height="500" fill="none" stroke="rgba(148, 187, 224, 0.15)" stroke-width="1"/>
+
+  <!-- Browser Header -->
+  <rect width="800" height="38" fill="#070D16"/>
+  <circle cx="22" cy="19" r="5" fill="#EF4444"/>
+  <circle cx="38" cy="19" r="5" fill="#F59E0B"/>
+  <circle cx="54" cy="19" r="5" fill="#10B981"/>
+  <rect x="180" y="8" width="440" height="22" rx="4" fill="#101C30" stroke="rgba(148, 187, 224, 0.2)" stroke-width="0.8"/>
+  <text x="400" y="23" font-family="'JetBrains Mono', monospace" font-size="10" fill="#92A6BE" text-anchor="middle">https://med-schedule.clinic/doctor-portal</text>
+
+  <!-- Sidebar -->
+  <rect x="0" y="38" width="165" height="462" fill="#0A1422" stroke="rgba(148, 187, 224, 0.1)" stroke-width="1"/>
+  <text x="20" y="70" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="13" fill="#6FCF97">CLINICARE RBAC</text>
+  <rect x="15" y="90" width="135" height="28" rx="4" fill="rgba(111, 207, 151, 0.12)" stroke="#6FCF97" stroke-width="0.8"/>
+  <text x="35" y="108" font-family="'Inter', sans-serif" font-size="11" fill="#6FCF97">Doctor Schedule</text>
+  <text x="35" y="142" font-family="'Inter', sans-serif" font-size="11" fill="#92A6BE">Patient Directory</text>
+  <text x="35" y="174" font-family="'Inter', sans-serif" font-size="11" fill="#92A6BE">Consultation Slots</text>
+  <text x="35" y="206" font-family="'Inter', sans-serif" font-size="11" fill="#92A6BE">Prescriptions</text>
+  <text x="35" y="238" font-family="'Inter', sans-serif" font-size="11" fill="#92A6BE">Admin Security</text>
+
+  <!-- Doctor Profile Card -->
+  <g transform="translate(185, 54)">
+    <rect width="590" height="66" rx="6" fill="url(#cardGradMed)" stroke="rgba(148, 187, 224, 0.2)" stroke-width="1"/>
+    <circle cx="36" cy="33" r="18" fill="rgba(90, 185, 232, 0.2)" stroke="#5AB9E8" stroke-width="1.2"/>
+    <text x="36" y="38" font-family="'Space Grotesk', sans-serif" font-size="14" font-weight="700" fill="#8CD4F5" text-anchor="middle">DR</text>
+    <text x="68" y="28" font-family="'Space Grotesk', sans-serif" font-size="14" font-weight="600" fill="#E7EEF6">Dr. Robert Chen, MD</text>
+    <text x="68" y="46" font-family="'Inter', sans-serif" font-size="11" fill="#92A6BE">Department of Cardiology · Role: CLINIC_DOCTOR</text>
+    <rect x="475" y="22" width="95" height="22" rx="11" fill="rgba(111, 207, 151, 0.15)"/>
+    <text x="522" y="36" font-family="'JetBrains Mono', monospace" font-size="9" fill="#6FCF97" text-anchor="middle">RBAC AUTH</text>
+  </g>
+
+  <!-- Interactive Timetable & Slots -->
+  <g transform="translate(185, 134)">
+    <rect width="590" height="340" rx="8" fill="url(#cardGradMed)" stroke="rgba(148, 187, 224, 0.2)" stroke-width="1"/>
+    <text x="20" y="28" font-family="'Space Grotesk', sans-serif" font-size="14" font-weight="600" fill="#E7EEF6">Appointment Slots — Concurrency Guard Active</text>
+    <rect x="460" y="14" width="110" height="22" rx="4" fill="rgba(90, 185, 232, 0.15)" stroke="rgba(90, 185, 232, 0.4)" stroke-width="0.8"/>
+    <text x="515" y="28" font-family="'JetBrains Mono', monospace" font-size="9.5" fill="#8CD4F5" text-anchor="middle">Optimistic Locking</text>
+
+    <!-- Slots Grid -->
+    <g transform="translate(20, 52)">
+      <!-- Slot 1 -->
+      <rect width="265" height="72" rx="5" fill="#0C1726" stroke="rgba(111, 207, 151, 0.4)" stroke-width="1"/>
+      <text x="14" y="24" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#6FCF97">09:00 – 09:45 AM</text>
+      <text x="14" y="44" font-family="'Inter', sans-serif" font-size="12" fill="#E7EEF6">Marco Bianchi</text>
+      <text x="14" y="60" font-family="'Inter', sans-serif" font-size="10" fill="#92A6BE">Routine Cardiac Follow-up</text>
+      <rect x="180" y="14" width="72" height="18" rx="4" fill="rgba(111, 207, 151, 0.15)"/>
+      <text x="216" y="27" font-family="'JetBrains Mono', monospace" font-size="9" fill="#6FCF97" text-anchor="middle">BOOKED</text>
+
+      <!-- Slot 2 -->
+      <g transform="translate(285, 0)">
+        <rect width="265" height="72" rx="5" fill="#0C1726" stroke="rgba(111, 207, 151, 0.4)" stroke-width="1"/>
+        <text x="14" y="24" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#6FCF97">10:00 – 10:45 AM</text>
+        <text x="14" y="44" font-family="'Inter', sans-serif" font-size="12" fill="#E7EEF6">Giulia Lombardi</text>
+        <text x="14" y="60" font-family="'Inter', sans-serif" font-size="10" fill="#92A6BE">ECG Diagnostic Review</text>
+        <rect x="180" y="14" width="72" height="18" rx="4" fill="rgba(111, 207, 151, 0.15)"/>
+        <text x="216" y="27" font-family="'JetBrains Mono', monospace" font-size="9" fill="#6FCF97" text-anchor="middle">BOOKED</text>
+      </g>
+
+      <!-- Slot 3 -->
+      <g transform="translate(0, 84)">
+        <rect width="265" height="72" rx="5" fill="#0C1726" stroke="rgba(90, 185, 232, 0.4)" stroke-width="1"/>
+        <text x="14" y="24" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#5AB9E8">11:00 – 11:45 AM</text>
+        <text x="14" y="44" font-family="'Inter', sans-serif" font-size="12" fill="#92A6BE">Available Consultation Slot</text>
+        <text x="14" y="60" font-family="'Inter', sans-serif" font-size="10" fill="#5B6E86">Click to allocate patient</text>
+        <rect x="180" y="14" width="72" height="18" rx="4" fill="rgba(90, 185, 232, 0.15)"/>
+        <text x="216" y="27" font-family="'JetBrains Mono', monospace" font-size="9" fill="#8CD4F5" text-anchor="middle">OPEN</text>
+      </g>
+
+      <!-- Slot 4 -->
+      <g transform="translate(285, 84)">
+        <rect width="265" height="72" rx="5" fill="#0C1726" stroke="rgba(232, 163, 61, 0.4)" stroke-width="1"/>
+        <text x="14" y="24" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#E8A33D">12:00 – 12:45 PM</text>
+        <text x="14" y="44" font-family="'Inter', sans-serif" font-size="12" fill="#E7EEF6">Matteo Conti</text>
+        <text x="14" y="60" font-family="'Inter', sans-serif" font-size="10" fill="#92A6BE">Pending SMS Confirmation</text>
+        <rect x="180" y="14" width="72" height="18" rx="4" fill="rgba(232, 163, 61, 0.15)"/>
+        <text x="216" y="27" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5BE6B" text-anchor="middle">HOLD</text>
+      </g>
+
+      <!-- Slot 5 -->
+      <g transform="translate(0, 168)">
+        <rect width="265" height="72" rx="5" fill="#0C1726" stroke="rgba(90, 185, 232, 0.4)" stroke-width="1"/>
+        <text x="14" y="24" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#5AB9E8">02:00 – 02:45 PM</text>
+        <text x="14" y="44" font-family="'Inter', sans-serif" font-size="12" fill="#92A6BE">Available Consultation Slot</text>
+        <text x="14" y="60" font-family="'Inter', sans-serif" font-size="10" fill="#5B6E86">Click to allocate patient</text>
+        <rect x="180" y="14" width="72" height="18" rx="4" fill="rgba(90, 185, 232, 0.15)"/>
+        <text x="216" y="27" font-family="'JetBrains Mono', monospace" font-size="9" fill="#8CD4F5" text-anchor="middle">OPEN</text>
+      </g>
+
+      <!-- Slot 6 -->
+      <g transform="translate(285, 168)">
+        <rect width="265" height="72" rx="5" fill="#0C1726" stroke="rgba(111, 207, 151, 0.4)" stroke-width="1"/>
+        <text x="14" y="24" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#6FCF97">03:00 – 03:45 PM</text>
+        <text x="14" y="44" font-family="'Inter', sans-serif" font-size="12" fill="#E7EEF6">Sara Moretti</text>
+        <text x="14" y="60" font-family="'Inter', sans-serif" font-size="10" fill="#92A6BE">Hypertension Assessment</text>
+        <rect x="180" y="14" width="72" height="18" rx="4" fill="rgba(111, 207, 151, 0.15)"/>
+        <text x="216" y="27" font-family="'JetBrains Mono', monospace" font-size="9" fill="#6FCF97" text-anchor="middle">BOOKED</text>
+      </g>
+    </g>
+
+    <text x="25" y="318" font-family="'JetBrains Mono', monospace" font-size="10" fill="#5B6E86">Spring Security RBAC · Optimistic Locking · Angular Signals · Docker</text>
+  </g>
+</svg>

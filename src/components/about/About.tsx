@@ -5,7 +5,7 @@ const langBadges = [
   { code: 'AR', label: 'Arabic', level: 'Native' },
   { code: 'FR', label: 'Français', level: 'Intermediate' },
   { code: 'EN', label: 'English', level: 'Intermediate' },
-  { code: 'IT', label: 'Italiano', level: 'Basic' },
+  { code: 'IT', label: 'Italiano', level: 'Intermediate' },
 ];
 
 export function About() {

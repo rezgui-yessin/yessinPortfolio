@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="learnBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#070F1B"/>
+      <stop offset="100%" stop-color="#0E1729"/>
+    </linearGradient>
+    <linearGradient id="learnCard" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#111F33"/>
+      <stop offset="100%" stop-color="#0A1322"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#learnBg)"/>
+  <rect width="800" height="500" fill="none" stroke="rgba(148, 187, 224, 0.15)" stroke-width="1"/>
+
+  <!-- Browser Header -->
+  <rect width="800" height="38" fill="#060C14"/>
+  <circle cx="22" cy="19" r="5" fill="#EF4444"/>
+  <circle cx="38" cy="19" r="5" fill="#F59E0B"/>
+  <circle cx="54" cy="19" r="5" fill="#10B981"/>
+  <rect x="180" y="8" width="440" height="22" rx="4" fill="#0E192B" stroke="rgba(148, 187, 224, 0.2)" stroke-width="0.8"/>
+  <text x="400" y="23" font-family="'JetBrains Mono', monospace" font-size="10" fill="#92A6BE" text-anchor="middle">https://learn.sfectoria.com/courses/distributed-systems/lecture-04</text>
+
+  <!-- Left: Multimedia Video Player & Course Chapters -->
+  <g transform="translate(25, 54)">
+    <!-- Video Player Simulation -->
+    <rect width="470" height="260" rx="6" fill="#03070E" stroke="rgba(148, 187, 224, 0.2)" stroke-width="1"/>
+    
+    <!-- Video Play Center Button -->
+    <circle cx="235" cy="120" r="28" fill="rgba(90, 185, 232, 0.2)" stroke="#5AB9E8" stroke-width="1.5"/>
+    <polygon points="228,108 248,120 228,132" fill="#5AB9E8"/>
+    
+    <text x="235" y="170" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="600" fill="#E7EEF6" text-anchor="middle">Lecture 4: Event-Driven Architectures with Kafka</text>
+    <text x="235" y="190" font-family="'Inter', sans-serif" font-size="11" fill="#92A6BE" text-anchor="middle">Module 2 · 42 mins · Prof. H. Laurent</text>
+
+    <!-- Video control bar -->
+    <rect x="15" y="228" width="440" height="20" rx="3" fill="rgba(10, 18, 32, 0.8)"/>
+    <rect x="25" y="236" width="180" height="4" rx="2" fill="#5AB9E8"/>
+    <rect x="205" y="236" width="240" height="4" rx="2" fill="rgba(148, 187, 224, 0.2)"/>
+    <circle cx="205" cy="238" r="5" fill="#8CD4F5"/>
+
+    <!-- Course Metadata Banner -->
+    <g transform="translate(0, 275)">
+      <rect width="470" height="135" rx="6" fill="url(#learnCard)" stroke="rgba(148, 187, 224, 0.2)" stroke-width="1"/>
+      <text x="18" y="28" font-family="'Space Grotesk', sans-serif" font-size="14" font-weight="700" fill="#E7EEF6">Course Progress: 68% Completed</text>
+      <rect x="18" y="40" width="434" height="6" rx="3" fill="#0A1220"/>
+      <rect x="18" y="40" width="295" height="6" rx="3" fill="#6FCF97"/>
+
+      <text x="18" y="75" font-family="'Inter', sans-serif" font-size="12" fill="#92A6BE">Chapter 1: Monoliths vs Distributed Services (Completed)</text>
+      <text x="18" y="98" font-family="'Inter', sans-serif" font-size="12" fill="#E7EEF6" font-weight="600">Chapter 2: WebSocket Protocols &amp; Push Notifications (In Progress)</text>
+      <text x="18" y="120" font-family="'Inter', sans-serif" font-size="12" fill="#5B6E86">Chapter 3: Resilient Stream Processing (Up Next)</text>
+    </g>
+  </g>
+
+  <!-- Right: Real-time WebSocket Chatroom -->
+  <g transform="translate(515, 54)">
+    <rect width="260" height="410" rx="6" fill="url(#learnCard)" stroke="rgba(90, 185, 232, 0.3)" stroke-width="1"/>
+    
+    <!-- Chat Header -->
+    <rect width="260" height="44" rx="6" fill="#0A1322"/>
+    <circle cx="20" cy="22" r="4" fill="#10B981"/>
+    <text x="32" y="26" font-family="'Space Grotesk', sans-serif" font-size="12" font-weight="700" fill="#E7EEF6">Collaborative Chat</text>
+    <rect x="180" y="12" width="68" height="20" rx="3" fill="rgba(111, 207, 151, 0.15)"/>
+    <text x="214" y="25" font-family="'JetBrains Mono', monospace" font-size="8.5" fill="#6FCF97" text-anchor="middle">WS LIVE</text>
+
+    <!-- Chat Messages -->
+    <g transform="translate(14, 58)">
+      <!-- Msg 1 -->
+      <text x="0" y="14" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" fill="#5AB9E8">Sarah Miller</text>
+      <text x="232" y="14" font-family="'JetBrains Mono', monospace" font-size="8" fill="#5B6E86" text-anchor="end">14:22</text>
+      <rect x="0" y="20" width="232" height="38" rx="4" fill="#070E18"/>
+      <text x="8" y="34" font-family="'Inter', sans-serif" font-size="10.5" fill="#E7EEF6">Does Kafka retain offset per</text>
+      <text x="8" y="48" font-family="'Inter', sans-serif" font-size="10.5" fill="#E7EEF6">consumer group automatically?</text>
+
+      <!-- Msg 2 (Instructor) -->
+      <g transform="translate(0, 68)">
+        <text x="0" y="14" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" fill="#E8A33D">Instructor (Laurent)</text>
+        <text x="232" y="14" font-family="'JetBrains Mono', monospace" font-size="8" fill="#5B6E86" text-anchor="end">14:23</text>
+        <rect x="0" y="20" width="232" height="46" rx="4" fill="#0C182A" stroke="rgba(232,163,61,0.3)"/>
+        <text x="8" y="34" font-family="'Inter', sans-serif" font-size="10.5" fill="#E7EEF6">Yes! Stored in internal topic</text>
+        <text x="8" y="48" font-family="'JetBrains Mono', monospace" font-size="10" fill="#F5BE6B">__consumer_offsets</text>
+        <text x="8" y="60" font-family="'Inter', sans-serif" font-size="10.5" fill="#E7EEF6">with commit intervals.</text>
+      </g>
+
+      <!-- Msg 3 -->
+      <g transform="translate(0, 150)">
+        <text x="0" y="14" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" fill="#5AB9E8">Lucas Rossi</text>
+        <text x="232" y="14" font-family="'JetBrains Mono', monospace" font-size="8" fill="#5B6E86" text-anchor="end">14:25</text>
+        <rect x="0" y="20" width="232" height="34" rx="4" fill="#070E18"/>
+        <text x="8" y="34" font-family="'Inter', sans-serif" font-size="10.5" fill="#E7EEF6">Super clear, thanks!</text>
+      </g>
+    </g>
+
+    <!-- Message Input box -->
+    <rect x="14" y="356" width="232" height="36" rx="4" fill="#070E18" stroke="rgba(148, 187, 224, 0.2)"/>
+    <text x="24" y="378" font-family="'Inter', sans-serif" font-size="11" fill="#5B6E86">Type message to chatroom...</text>
+  </g>
+</svg>
