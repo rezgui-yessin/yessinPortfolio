@@ -279,6 +279,20 @@ export function Contact() {
               value="rezgui-yessin"
               href={social.github}
             />
+
+            {/* Developer coding animation */}
+            <div className="mt-2 flex flex-col items-center justify-center overflow-hidden rounded-md border border-[color:var(--bp-line)] bg-[color:var(--bp-bg-card)] p-4 text-center">
+              <img
+                src="/coding.gif"
+                alt="Developer coding"
+                className="h-28 w-auto max-w-full rounded object-contain"
+                loading="lazy"
+              />
+              <div className="mt-2.5 flex items-center gap-2 font-mono text-[11px] text-[color:var(--bp-cyan)]">
+                <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-[color:var(--bp-good)]" />
+                <span className="tracking-wide">Building & shipping code daily</span>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>
