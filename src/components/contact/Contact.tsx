@@ -283,7 +283,7 @@ export function Contact() {
             {/* Developer coding animation */}
             <div className="mt-2 flex flex-col items-center justify-center overflow-hidden rounded-md border border-[color:var(--bp-line)] bg-[color:var(--bp-bg-card)] p-4 text-center">
               <img
-                src="/coding.gif"
+                src="/gif/giphy.gif"
                 alt="Developer coding"
                 className="h-28 w-auto max-w-full rounded object-contain"
                 loading="lazy"
