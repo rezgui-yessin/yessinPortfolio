@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiMail, FiLinkedin, FiGithub, FiMapPin, FiPhone, FiCopy, FiCheck, FiSend, FiLoader, FiAlertCircle, FiRefreshCw } from 'react-icons/fi';
+import { FiMail, FiLinkedin, FiGithub, FiMapPin, FiPhone, FiCopy, FiCheck, FiSend, FiLoader, FiRefreshCw } from 'react-icons/fi';
 import { useI18n } from '../../i18n';
 import { social } from '../../data/social';
 import { SectionEyebrow } from '../about/About';

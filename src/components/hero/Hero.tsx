@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FiArrowRight, FiFileText, FiDownload } from 'react-icons/fi';
+import { FiArrowRight, FiFileText } from 'react-icons/fi';
 import { useI18n } from '../../i18n';
 import { SystemDiagram } from './SystemDiagram';
 import { HeroParticleCanvas } from './HeroParticleCanvas';
 import { ResumeModal } from '../cv/ResumeModal';
 
 export function Hero() {
-  const { lang, t } = useI18n();
+  const { t } = useI18n();
   const [cvOpen, setCvOpen] = useState(false);
 
   const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });

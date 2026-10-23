@@ -7,12 +7,13 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          // Stable vendor chunks — cached independently by the browser
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-          motion: ['framer-motion'],
-          icons: ['react-icons'],
-          three: ['three'],
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('three')) return 'three';
+            if (id.includes('framer-motion')) return 'motion';
+            if (id.includes('react-icons')) return 'icons';
+            return 'vendor';
+          }
         },
       },
     },
